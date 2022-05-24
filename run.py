@@ -12,8 +12,9 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("smart_house_inventory")
 
-item =  SHEET.worksheet("item")
+food = SHEET.worksheet("food")
+item = SHEET.worksheet("item")
 
-data = item.get_all_values()
+data = food.get_all_values()
 
 print(data)
