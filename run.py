@@ -23,17 +23,24 @@ def get_stock_data():
 
     data_food_raw = food.get_all_values()
     data_food = ""
-    data_item = item.get_all_values()
+    data_item_raw = item.get_all_values()
+    data_item = ""
 
     for product in data_food_raw:
         for data in product:
-            data_food += f"{data} |"
+            data_food += data + (30 - len(data)) * " "
         data_food += f"{new_line}"
 
+    for product in data_item_raw:
+        for data in product:
+            data_item += data + (30 - len(data)) * " "
+        data_item += f"{new_line}"
+
     return (
-        f"These are all the items you have in your house:{new_line}"
+        f"These are all the items you have in your house:{2 * new_line}"
         f"{data_item}{new_line}"
-        f"This is all the food you have in your house:{new_line}{data_food}"
+        f"This is all the food you have in your house:{2 * new_line}"
+        f"{data_food}"
     )
 
 
