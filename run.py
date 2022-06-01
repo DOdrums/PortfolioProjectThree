@@ -1,5 +1,8 @@
+import datetime
+
 import gspread
 from google.oauth2.service_account import Credentials
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -44,4 +47,17 @@ def get_stock_data():
     )
 
 
-print(get_stock_data())
+class Product:
+    """
+    class to initialise a product
+    can be either Food or Item
+    """
+    def __init__(self, name, amount, days_per):
+        self.name = name
+        self.amount = amount
+        self.days_per = days_per
+        self.date_added = datetime.datetime.now()
+
+
+afwasborstel = Product("", 0, 0)
+print(afwasborstel.__dict__)
