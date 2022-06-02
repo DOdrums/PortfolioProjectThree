@@ -1,5 +1,4 @@
 import datetime
-
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -66,11 +65,24 @@ class Product:
         item.append_row(data)
 
 
-afwasborstel = Product("hank", 0, 0)
-print(afwasborstel.name)
-# print(get_stock_data())
-afwasborstel.add_item()
+def main_function():
+    """
+    main function of the program, ask user to see inventory or add a product.
+    """
+    print("Do you want to see your inventory ('I') or add a product ('P')?")
+    answer = input()
+    if answer == "I":
+        print(get_stock_data())
+    elif answer == "P":
+        print("Cool let's add a product!")
 
 
-# for delete function, show names with row number and let user enter number to delete data
-# make seperate function for calculating days left/items left (called by get stock data function)
+main_function()
+
+
+# 1. for delete function, show names with row number and
+# let user enter number to delete data
+# 2. make seperate function for calculating days left/items
+# left (called by get stock data function)
+# 3. for calculating the days left, data added needs to be converted back
+# to datetime object
