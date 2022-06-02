@@ -65,6 +65,16 @@ class Product:
         item.append_row(data)
 
 
+class Food(Product):
+    """
+    Food class that subclasses the product class
+    inherits all variables and adds expiry variable
+    """
+    def __init__(self, name, amount, days_per, date_added, expiry_date):
+        super().__init__(name, amount, days_per)
+        self.expiry_date = expiry_date
+
+
 def main_function():
     """
     main function of the program, ask user to see inventory or add a product.
@@ -77,8 +87,10 @@ def main_function():
         print("Cool let's add a product!")
 
 
-main_function()
-
+# main_function()
+# broodje = Food("broodje", 3, 2, "", "04/23/2022")
+# print(broodje.__dict__)
+# broodje.add_item()
 
 # 1. for delete function, show names with row number and
 # let user enter number to delete data
