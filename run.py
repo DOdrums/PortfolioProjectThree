@@ -55,14 +55,21 @@ class Product:
         self.name = name
         self.amount = amount
         self.days_per = days_per
-        self.date_added = datetime.datetime.now()
+        self.date_added = str(datetime.datetime.now())
 
-    def add_item(self):
+    def add_product(self):
         """
-        add item data to google sheet
+        add product data to google sheet
         """
-        data = [self.name, self.amount, self.days_per, str(self.date_added)]
-        item.append_row(data)
+        data = []
+        for value in self.__dict__.values():
+            data.append(value)
+        if len(data) == 4:
+            item.append_row(data)
+        elif len(data) == 5:
+            food.append_row(data)
+        else:
+            print("Your list doesn't seem to have the right amount of items!")
 
 
 class Food(Product):
@@ -88,9 +95,14 @@ def main_function():
 
 
 # main_function()
-broodje = Food("broodje", 3, 2, "04/23/2022")
-print(broodje.__dict__)
-# broodje.add_item()
+
+# broodje = Product("broodje", 3, 2)
+# print(broodje.__dict__)
+# broodje.add_product()
+
+# soepje = Food("soepie", 2, 4, "06/10/2022")
+# print(soepje.__dict__)
+# soepje.add_product()
 
 # 1. for delete function, show names with row number and
 # let user enter number to delete data
