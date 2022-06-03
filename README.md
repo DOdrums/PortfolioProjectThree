@@ -1,31 +1,21 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Smart House Inventory
 
-Welcome DOdrums,
+## Portfolio Project 3: Python Essentials
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+![Multi screen mockup]()
 
-## Reminders
+This project is built as part of the Code Institute Full Stack Software Development course. For this course, Dirk Ornee had to built a third Portfolio Project. Inspired by the expired products in his fridge and the occasional lack of toilet paper in his bathroom, he decided to build a Smart House Inventory solution, that will keep track of all the products in his house.
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+## Live Site
 
-## Creating the Heroku app
+[Smart House Inventory]()
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## Github Repository
 
-1. `heroku/python`
-2. `heroku/nodejs`
+[PortfolioProjectThree](https://github.com/DOdrums/PortfolioProjectThree)
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+## Testing
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+### Bugs
 
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
+* When creating the Food subclass, an error "too many positional arguments for method call" would pop up. This was caused by the "date_added" variable being passed as an argument, while in the Product parentclass, this is not passed as an argument. After removing this argument from the Food init method, the error was resolved and the class worked as expected.
