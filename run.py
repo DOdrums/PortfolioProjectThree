@@ -17,9 +17,9 @@ food = SHEET.worksheet("food")
 item = SHEET.worksheet("item")
 
 
-def get_stock_data():
+def display_stock_data():
     """
-    function to display all the stock of the house
+    function to display all the stock of the house.
     """
     new_line = '\n'
 
@@ -49,7 +49,7 @@ def get_stock_data():
 class Product:
     """
     class to initialise a product
-    can be either Food or Item
+    can be either Food or Item.
     """
     def __init__(self, name, amount, days_per):
         self.name = name
@@ -59,7 +59,7 @@ class Product:
 
     def add_product(self):
         """
-        add product data to google sheet
+        add product data to google sheet.
         """
         data = []
         for value in self.__dict__.values():
@@ -75,11 +75,34 @@ class Product:
 class Food(Product):
     """
     Food class that subclasses the product class
-    inherits all variables and adds expiry variable
+    inherits all variables and adds expiry variable.
     """
     def __init__(self, name, amount, days_per, expiry_date):
         super().__init__(name, amount, days_per)
         self.expiry_date = expiry_date
+
+
+def make_product():
+    """
+    Creates instance of Product or Food class and adds
+    it to google sheet database.
+    """
+    print("Do you want to add foor or an item(F/I)?")
+    answer_f_or_i = input()
+    print("What is the name of your product?")
+    name = input()
+    print("How many items does your product contain?")
+    amount = input()
+    print("How many days does 1 item last?")
+    days_per_item = input()
+    if answer_f_or_i == "F":
+        print("When does the product expire?")
+        expiry = input()
+        food_item = Food(name, amount, days_per_item, expiry)
+        food_item.add_product()
+    elif answer_f_or_i == "I":
+        item_item = Product(name, amount, days_per_item)
+        item_item.add_product()
 
 
 def main_function():
@@ -89,12 +112,13 @@ def main_function():
     print("Do you want to see your inventory ('I') or add a product ('P')?")
     answer = input()
     if answer == "I":
-        print(get_stock_data())
+        print(display_stock_data())
     elif answer == "P":
         print("Cool let's add a product!")
+        make_product()
 
 
-# main_function()
+main_function()
 
 # broodje = Product("broodje", 3, 2)
 # print(broodje.__dict__)
