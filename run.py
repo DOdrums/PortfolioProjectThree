@@ -1,4 +1,5 @@
 import datetime
+import re
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -96,8 +97,12 @@ def make_product():
     print("How many days does 1 item last?")
     days_per_item = input()
     if answer_f_or_i == "F":
-        print("When does the product expire?")
+        print("When does the product expire (yyyy-mm-dd)?")
         expiry = input()
+        date_regex = r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+        while re.fullmatch(date_regex, expiry) is None:
+            print("Please enter expiry date in format yyyy-mm-dd:")
+            expiry = input()
         food_item = Food(name, amount, days_per_item, expiry)
         food_item.add_product()
     elif answer_f_or_i == "I":

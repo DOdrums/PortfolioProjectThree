@@ -14,6 +14,12 @@ This project is built as part of the Code Institute Full Stack Software Developm
 
 [PortfolioProjectThree](https://github.com/DOdrums/PortfolioProjectThree)
 
+## Credits
+
+### Code
+
+* [Regexland](https://regexland.com/regex-dates/) - to validate the date input with regex
+
 ## Testing
 
 ### Bugs
