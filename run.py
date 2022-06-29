@@ -32,7 +32,7 @@ def display_stock_data():
 
     for product in data_food_raw:
         data_food += f"{i} "
-        data_food += product[0] + (16 - len(product[0])) * " " + "|"
+        data_food += product[0] + (19 - len(product[0])) * " " + "|"
         for data in range(1, 5):
             data_food += product[data] + (11 - len(product[data])) * " " + "|"
         data_food += "Days left"
@@ -42,7 +42,7 @@ def display_stock_data():
     i = 1
     for product in data_item_raw:
         data_item += f"{i} "
-        data_item += product[0] + (16 - len(product[0])) * " " + "|"
+        data_item += product[0] + (19 - len(product[0])) * " " + "|"
         for data in range(1, 4):
             data_item += product[data] + (11 - len(product[data])) * " " + "|"
         data_item += f"{new_line}"
@@ -65,7 +65,7 @@ class Product:
         self.name = name
         self.amount = amount
         self.days_per = days_per
-        self.date_added = str(datetime.datetime.now())
+        self.date_added = str(datetime.date.today())
 
     def add_product(self):
         """
@@ -106,22 +106,29 @@ def make_product():
         # check if answer if F or I
         print("Do you want to add food or an item? Please enter 'F' or 'I':")
         food_or_item = input().upper()
-    print("What is the name of your product?")
+    print(
+        """
+What is the name of your product (max 18 charachters)?
+..................""")
     name = input()
 
     while not amount.isdigit():
         # check if amount is digit
         print(
-            """How many items does your product contain?
-             Please enter a whole number:"""
+            """
+How many items does your product contain?
+Please enter a whole number:
+"""
             )
         amount = input()
 
     while not days_per_item.isdigit():
         # check if days per item is digit
         print(
-            """How many days does it take to use up 1 item
-            ? Please enter a whole number:"""
+            """
+How many days does it take to use up 1 item? Please
+enter a whole number:
+"""
             )
         days_per_item = input()
 
