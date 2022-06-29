@@ -88,25 +88,42 @@ def make_product():
     Creates instance of Product or Food class and adds
     it to google sheet database.
     """
-    print("Do you want to add foor or an item(F/I)?")
-    answer_f_or_i = input()
+    food_or_item = ""
+    name = ""
+    amount = ""
+    days_per_item = ""
+
+    while food_or_item != "F" and food_or_item != "I":
+        # check if answer if F or I
+        print("Do you want to add food or an item(F/I)?")
+        food_or_item = input().upper()
     print("What is the name of your product?")
     name = input()
-    print("How many items does your product contain?")
-    amount = input()
-    print("How many days does 1 item last?")
-    days_per_item = input()
-    if answer_f_or_i == "F":
+
+    while not amount.isdigit():
+        # check if amount is digit
+        print("How many items does your product contain?")
+        amount = input()
+
+    while not days_per_item.isdigit():
+        # check if days per item is digit
+        print("How many days does 1 item last?")
+        days_per_item = input()
+
+    if food_or_item == "F":
+        # if food, ask for date and validate it
+        # than create istance of food and add to sheet
         print("When does the product expire (yyyy-mm-dd)?")
         expiry = input()
         date_regex = r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
         while re.fullmatch(date_regex, expiry) is None:
             print("Please enter expiry date in format yyyy-mm-dd:")
             expiry = input()
-        food_item = Food(name, amount, days_per_item, expiry)
+        food_item = Food(name, int(amount), int(days_per_item), expiry)
         food_item.add_product()
-    elif answer_f_or_i == "I":
-        item_item = Product(name, amount, days_per_item)
+    elif food_or_item == "I":
+        # if item, create instance of product and add to sheet
+        item_item = Product(name, int(amount), int(days_per_item))
         item_item.add_product()
 
 
@@ -115,12 +132,15 @@ def main_function():
     main function of the program, ask user to see inventory or add a product.
     """
     print("Do you want to see your inventory ('I') or add a product ('P')?")
-    answer = input()
+    answer = input().upper()
     if answer == "I":
         print(display_stock_data())
     elif answer == "P":
         print("Cool let's add a product!")
         make_product()
+    else:
+        print("Please enter and 'I' or an 'P'")
+        main_function()
 
 
 main_function()
