@@ -28,16 +28,25 @@ def display_stock_data():
     data_food = ""
     data_item_raw = item.get_all_values()
     data_item = ""
+    i = 1
 
     for product in data_food_raw:
-        for data in product:
-            data_food += data + (30 - len(data)) * " "
+        data_food += f"{i} "
+        data_food += product[0] + (16 - len(product[0])) * " " + "|"
+        for data in range(1, 5):
+            data_food += product[data] + (11 - len(product[data])) * " " + "|"
+        data_food += "Days left"
         data_food += f"{new_line}"
+        i += 1
 
+    i = 1
     for product in data_item_raw:
-        for data in product:
-            data_item += data + (30 - len(data)) * " "
+        data_item += f"{i} "
+        data_item += product[0] + (16 - len(product[0])) * " " + "|"
+        for data in range(1, 4):
+            data_item += product[data] + (11 - len(product[data])) * " " + "|"
         data_item += f"{new_line}"
+        i += 1
 
     return (
         f"These are all the items you have in your house:{2 * new_line}"
@@ -95,19 +104,25 @@ def make_product():
 
     while food_or_item != "F" and food_or_item != "I":
         # check if answer if F or I
-        print("Do you want to add food or an item(F/I)?")
+        print("Do you want to add food or an item? Please enter 'F' or 'I':")
         food_or_item = input().upper()
     print("What is the name of your product?")
     name = input()
 
     while not amount.isdigit():
         # check if amount is digit
-        print("How many items does your product contain?")
+        print(
+            """How many items does your product contain?
+             Please enter a whole number:"""
+            )
         amount = input()
 
     while not days_per_item.isdigit():
         # check if days per item is digit
-        print("How many days does 1 item last?")
+        print(
+            """How many days does it take to use up 1 item
+            ? Please enter a whole number:"""
+            )
         days_per_item = input()
 
     if food_or_item == "F":
@@ -144,7 +159,11 @@ def main_function():
 
 
 main_function()
-
+# flutsels = food.get_all_values()
+# for product in flutsels:
+#     for data in range(1, 4):
+#         print(product[data])
+# print(flutsels[1][0])
 # broodje = Product("broodje", 3, 2)
 # print(broodje.__dict__)
 # broodje.add_product()
