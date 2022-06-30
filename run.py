@@ -48,12 +48,19 @@ def display_stock_data():
         data_item += f"{new_line}"
         i += 1
 
-    return (
+    print(
         f"These are all the items you have in your house:{2 * new_line}"
         f"{data_item}{new_line}"
         f"This is all the food you have in your house:{2 * new_line}"
-        f"{data_food}"
+        f"{data_food}{new_line}"
+        f"Hit 'R' to return to the start of the program or 'Q' to exit:"
     )
+
+    user_input = input().upper()
+    if user_input == "R":
+        main_function()
+    elif user_input == "Q":
+        pass
 
 
 class Product:
@@ -107,28 +114,24 @@ def make_product():
         print("Do you want to add food or an item? Please enter 'F' or 'I':")
         food_or_item = input().upper()
     print(
-        """
-What is the name of your product (max 18 charachters)?
-..................""")
+        "What is the name of your product (max 18 charachters)?\n"
+        ".................."
+        )
     name = input()
 
     while not amount.isdigit():
         # check if amount is digit
         print(
-            """
-How many items does your product contain?
-Please enter a whole number:
-"""
+            "How many items does your product contain?\n"
+            "Please enter a whole number"
             )
         amount = input()
 
     while not days_per_item.isdigit():
         # check if days per item is digit
         print(
-            """
-How many days does it take to use up 1 item? Please
-enter a whole number:
-"""
+            "How many days does it take to use up 1 item?\n"
+            "Please enter a whole number:"
             )
         days_per_item = input()
 
@@ -141,12 +144,35 @@ enter a whole number:
         while re.fullmatch(date_regex, expiry) is None:
             print("Please enter expiry date in format yyyy-mm-dd:")
             expiry = input()
-        food_item = Food(name, int(amount), int(days_per_item), expiry)
-        food_item.add_product()
+        item_item = Food(name, int(amount), int(days_per_item), expiry)
     elif food_or_item == "I":
         # if item, create instance of product and add to sheet
         item_item = Product(name, int(amount), int(days_per_item))
-        item_item.add_product()
+        # item_item.add_product()
+    print("Add product(Y/N)")
+    user_add_y_n = ""
+    while user_add_y_n != "Y" or "N":
+        user_add_y_n = input().upper()
+        if user_add_y_n == "Y":
+            item_item.add_product()
+            break
+        elif user_add_y_n == "N":
+            break
+        else:
+            print("Please enter 'Y' or 'N'")
+
+    print(
+        "Hit 'A' to add another product, 'R' to return\n"
+        "to the start of the program or 'Q' to exit:"
+    )
+
+    user_input = input().upper()
+    if user_input == "A":
+        make_product()
+    elif user_input == "R":
+        main_function()
+    elif user_input == "Q":
+        pass
 
 
 def main_function():
@@ -156,7 +182,7 @@ def main_function():
     print("Do you want to see your inventory ('I') or add a product ('P')?")
     answer = input().upper()
     if answer == "I":
-        print(display_stock_data())
+        display_stock_data()
     elif answer == "P":
         print("Cool let's add a product!")
         make_product()
