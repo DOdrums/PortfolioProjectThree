@@ -53,11 +53,22 @@ def display_stock_data():
         f"{data_item}{new_line}"
         f"This is all the food you have in your house:{2 * new_line}"
         f"{data_food}{new_line}"
-        f"Hit 'R' to return to the start of the program or 'Q' to exit:"
+        f"Hit 'D' to delete an item, 'R' to return"
+        f" to the start of the program or 'Q' to exit:"
     )
 
     user_input = input().upper()
-    if user_input == "R":
+    if user_input == "D":
+        item_or_food = ""
+        print(
+            "Do you want to delete a product from the item or food list(I/F)?"
+        )
+        item_or_food = input().upper()
+        if item_or_food == "I":
+            delete_product(item)
+        elif item_or_food == "F":
+            delete_product(food)
+    elif user_input == "R":
         main_function()
     elif user_input == "Q":
         pass
@@ -175,11 +186,30 @@ def make_product():
         pass
 
 
+def delete_product(sheet):
+    """
+    deletes products from the sheet by row number
+    it's possible for user to delete multiple rows at once
+    """
+    products_to_delete = ""
+    print(
+        "Which products do you want to delete?"
+        "Please enter the numbers, seperated by comma's (for example: 2, 4, 7)"
+    )
+    products_to_delete = input()
+    products_to_delete = products_to_delete.split(",")
+    print(products_to_delete)
+    for number in products_to_delete:
+        sheet.delete_rows(int(number))
+
+
 def main_function():
     """
     main function of the program, ask user to see inventory or add a product.
     """
-    print("Do you want to see your inventory ('I') or add a product ('P')?")
+    print(
+        "Do you want to see/edit your inventory ('I') or add a product ('P')?"
+        )
     answer = input().upper()
     if answer == "I":
         display_stock_data()
