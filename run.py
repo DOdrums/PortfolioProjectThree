@@ -192,21 +192,32 @@ def delete_product(sheet):
     it's possible for user to delete multiple rows at once
     """
     products_to_delete = ""
-    print(
-        "Which products do you want to delete?"
-        "Please enter the numbers, seperated by comma's (for example: 2, 4, 7)"
-    )
-    products_to_delete = input()
-    products_to_delete = products_to_delete.split(",")
-    print(products_to_delete)
+    is_numbers = False
+    while not is_numbers:
+        print(
+            "Which products do you want to delete? "
+            "Please enter the numbers, seperated by comma's "
+            "(for example: 2, 4, 7)"
+        )
+        products_to_delete = input().split(",")
+        is_numbers = all([item.isdigit() for item in products_to_delete])
+    products_to_delete = [int(x) for x in products_to_delete]
+    products_to_delete.sort(reverse=True)
     for number in products_to_delete:
         sheet.delete_rows(int(number))
 
 
 def main_function():
     """
-    main function of the program, ask user to see inventory or add a product.
+    main function of the program, asks user to see inventory or add a product.
     """
+    print(
+        "\nWelcome to your Smart House Inventory!\n\n"
+        "With this program, you can track all the products in your house and "
+        "fridge,\nand see when you'd have to restock on an item! When adding"
+        " a product,\nmake sure to enter a realistic 'days per use', so the "
+        "Smart House Inventory\ncan calculate when you'll run out of it!\n"
+        )
     print(
         "Do you want to see/edit your inventory ('I') or add a product ('P')?"
         )
@@ -217,27 +228,13 @@ def main_function():
         print("Cool let's add a product!")
         make_product()
     else:
-        print("Please enter and 'I' or an 'P'")
+        print("Please enter an 'I' or a 'P'")
         main_function()
 
 
 main_function()
-# flutsels = food.get_all_values()
-# for product in flutsels:
-#     for data in range(1, 4):
-#         print(product[data])
-# print(flutsels[1][0])
-# broodje = Product("broodje", 3, 2)
-# print(broodje.__dict__)
-# broodje.add_product()
 
-# soepje = Food("soepie", 2, 4, "06/10/2022")
-# print(soepje.__dict__)
-# soepje.add_product()
-
-# 1. for delete function, show names with row number and
-# let user enter number to delete data
-# 2. make seperate function for calculating days left/items
+# 1. make seperate function for calculating days left/items
 # left (called by get stock data function)
-# 3. for calculating the days left, data added needs to be converted back
+# 2. for calculating the days left, data added needs to be converted back
 # to datetime object
