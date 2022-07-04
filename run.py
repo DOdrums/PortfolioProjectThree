@@ -216,7 +216,7 @@ def main_function():
     print(
         "\nWelcome to your Smart House Inventory!\n\n"
         "With this program, you can track all the products in your house and "
-        "fridge,\nand see when you'd have to restock on an item! When adding"
+        "fridge,\nand see when you'd have to restock an item! When adding"
         " a product,\nmake sure to enter a realistic 'days per use', so the "
         "Smart House Inventory\ncan calculate when you'll run out of it!\n"
         )
