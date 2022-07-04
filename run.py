@@ -197,14 +197,16 @@ def delete_product(sheet):
         print(
             "Which products do you want to delete? "
             "Please enter the numbers, seperated by comma's "
-            "(for example: 2, 4, 7)"
+            "(for example: 2,4,7)"
         )
         products_to_delete = input().split(",")
-        is_numbers = all([item.isdigit() for item in products_to_delete])
+        is_numbers = all(item.isdigit() for item in products_to_delete)
     products_to_delete = [int(x) for x in products_to_delete]
     products_to_delete.sort(reverse=True)
     for number in products_to_delete:
-        sheet.delete_rows(int(number))
+        if number != 1:
+            sheet.delete_rows(number)
+    display_stock_data()
 
 
 def main_function():
@@ -238,3 +240,4 @@ main_function()
 # left (called by get stock data function)
 # 2. for calculating the days left, data added needs to be converted back
 # to datetime object
+# 3. Add function to edit amount and expiry date of product
