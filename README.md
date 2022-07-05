@@ -19,9 +19,13 @@ This project is built as part of the Code Institute Full Stack Software Developm
 ### Code
 
 * [Regexland](https://regexland.com/regex-dates/) - to validate the date input with regex
+* [datascienceparichay](https://datascienceparichay.com/article/python-check-list-contains-only-numbers/) - to check if a string/list of strings consists of digits
+* [finxter](https://blog.finxter.com/how-to-convert-a-string-list-to-an-integer-list-in-python/#:~:text=The%20most%20Pythonic%20way%20to,x)%20built%2Din%20function.) - to convert a list of strings to a list of integers
+* [stackoverflow(answer from Arash)](https://stackoverflow.com/a/70391597/16545052) - to delete rows of data from google sheet
 
 ## Testing
 
 ### Bugs
 
-* When creating the Food subclass, an error "too many positional arguments for method call" would pop up. This was caused by the "date_added" variable being passed as an argument, while in the Product parentclass, this is not passed as an argument. After removing this argument from the Food init method, the error was resolved and the class worked as expected.
+* When creating the ```Food``` subclass, an error ```"too many positional arguments for method call"``` would pop up. This was caused by the ```date_added``` variable being passed as an argument, while in the ```Product``` parentclass, this is not passed as an argument. After removing this argument from the ```Food``` init method, the error was resolved and the class worked as expected.
+* When using the ```sort()``` method in the ```delete_product()``` function, it kept returning ```None```. The reason for this, is that the ```sort()``` method sorts a list in place, instead of returning a new list. When writing ```list = list.sort()``` the result will be ```None``` because of this.
