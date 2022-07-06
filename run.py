@@ -164,46 +164,57 @@ def display_stock_data():
     data_food = ""
     data_item_raw = item.get_all_values()
     data_item = ""
-    new_quantity = calculate_quantity_left(data_food_raw)
+    quantity_and_days = calculate_quantity_left(data_food_raw)
     i = 1
 
     for product in data_food_raw:
         data_food += f"{i} "
         data_food += product[0] + (19 - len(product[0])) * " " + "|"
         if i > 1:
-            data_food += product[1] + "(" + str(new_quantity[0]) + ")" + (
-                9 - (
-                    len(str(product[1])) + len(str(new_quantity[0])))
+            data_food += str(
+                quantity_and_days[0][0]) + "/" + product[1] + (
+                10 - (
+                    len(str(product[1])) + len(str(quantity_and_days[0][0])))
                     ) * " " + "|"
-            new_quantity.pop(0)
+            quantity_and_days[0].pop(0)
         else:
             data_food += product[1] + (11 - len(product[1])) * " " + "|"
         for data in range(2, 5):
             data_food += product[data] + (11 - len(product[data])) * " " + "|"
-        data_food += "Days left"
+        if i < 2:
+            data_food += "Days left"
+        else:
+            data_food += str(quantity_and_days[1][0])
+            quantity_and_days[1].pop(0)
         data_food += f"{new_line}"
         i += 1
 
-    new_quantity = calculate_quantity_left(data_item_raw)
+    quantity_and_days = calculate_quantity_left(data_item_raw)
     i = 1
     for product in data_item_raw:
-        print(new_quantity)
         data_item += f"{i} "
         data_item += product[0] + (19 - len(product[0])) * " " + "|"
         if i > 1:
-            data_item += product[1] + "(" + str(new_quantity[0]) + ")" + (
-                9 - (
-                    len(str(product[1])) + len(str(new_quantity[0])))
+            data_item += str(
+                quantity_and_days[0][0]) + "/" + product[1] + (
+                10 - (
+                    len(str(product[1])) + len(str(quantity_and_days[0][0])))
                     ) * " " + "|"
-            new_quantity.pop(0)
+            quantity_and_days[0].pop(0)
         else:
             data_item += product[1] + (11 - len(product[1])) * " " + "|"
         for data in range(2, 4):
             data_item += product[data] + (11 - len(product[data])) * " " + "|"
+        if i < 2:
+            data_item += "Days left"
+        else:
+            data_item += str(quantity_and_days[1][0])
+            quantity_and_days[1].pop(0)
         data_item += f"{new_line}"
         i += 1
 
     print(
+        f"{new_line}"
         f"These are all the items you have in your house:{2 * new_line}"
         f"{data_item}{new_line}"
         f"This is all the food you have in your house:{2 * new_line}"
@@ -241,7 +252,6 @@ def calculate_quantity_left(sheet):
     length = len(sheet)
     length_items = len(sheet[0])
     for product in range(1, length):
-        print(length)
         quantity.append(sheet[product][1])
         days_p_use.append(sheet[product][2])
         date_added.append(sheet[product][3])
@@ -250,6 +260,7 @@ def calculate_quantity_left(sheet):
     current_date = datetime.date.today()
     length -= 1
     new_quantity = []
+    days_left = []
     for index in range(length):
         days_spend = current_date - datetime.datetime.strptime(
             date_added[index], "%Y-%m-%d"
@@ -260,7 +271,12 @@ def calculate_quantity_left(sheet):
         if quantity_left < 0:
             quantity_left = 0
         new_quantity.append(math.ceil(quantity_left))
-    return new_quantity
+        days = math.ceil(quantity_left) * int(days_p_use[index])
+        days_left.append(days)
+    quantity_and_days_left = []
+    quantity_and_days_left.append(new_quantity)
+    quantity_and_days_left.append(days_left)
+    return quantity_and_days_left
     # current date - date added = days spend
     # quantity - round(days spend / days per use) = quantity left
     # quantity left * days per use = days left
@@ -292,9 +308,6 @@ def main_function():
 
 
 main_function()
-# amountje = calculate_days_left(food.get_all_values())
-# print(amountje[1])
-
 
 # 1. make seperate function for calculating days left/items
 # left (called by get stock data function)
