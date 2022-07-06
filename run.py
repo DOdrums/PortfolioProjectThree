@@ -196,7 +196,7 @@ def edit_product():
     print("\nWhich product you want to edit?")
     product_number = 0
     while product_number < 1:
-        print("\nPlease enter the number of your product:")
+        print("\nPlease enter the product number as listed in the inventory:")
         product_number = int(input())
 
     valid_input = ["N", "Q", "D"]
