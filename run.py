@@ -148,8 +148,10 @@ def make_product():
         user_add_y_n = input().upper()
         if user_add_y_n == "Y":
             item_item.add_product()
+            print("\nProduct added!")
             break
         if user_add_y_n == "N":
+            print("\nProduct not added!")
             break
         print("\nPlease enter 'Y' or 'N'")
 
@@ -177,7 +179,6 @@ def edit_product():
     function to edit individual cells in the google sheet
     """
     item_or_food = ""
-    name = "1234567890123456789"
     sheet = ""
     print(
         "\nDo you want to edit a product from "
@@ -202,29 +203,36 @@ def edit_product():
     user_input = ""
     print(
         "\nDo you want to edit the name, quantity "
-        "or days p use ('N', 'Q' or 'D')?"
+        "or days per use ('N', 'Q' or 'D')?"
         )
     while user_input not in valid_input:
         user_input = input().upper()
         if user_input == "N":
-            while len(name) > 18:
-                print(
-                    "\nWhat is the new name of "
-                    "your product (max 18 charachters)?\n"
-                    ".................."
-                )
-                name = input()
-                if len(name) > 18:
-                    print(
-                        "Please enter a name with a "
-                        "max length of 18 charachters"
-                        )
+            print("\nOkay let's update the name!")
+            name = get_name()
             name_cell = "A" + str((int(product_number) + 1))
             sheet.update_acell(name_cell, name)
+            print("\nName updated!")
         elif user_input == "Q":
-            main_function()
+            print("\nOkay let's update the quantity!")
+            quantity = get_quantity()
+            if item_or_food == "F":
+                print("\nWe should also update the expiry date!")
+                expiry = "'" + get_expiry_date()
+                expiry_cell = "E" + str((int(product_number) + 1))
+                sheet.update_acell(expiry_cell, expiry)
+            qt_cell = "B" + str((int(product_number) + 1))
+            sheet.update_acell(qt_cell, quantity)
+            date_added = "'" + str(datetime.date.today())
+            date_cell = "D" + str((int(product_number) + 1))
+            sheet.update_acell(date_cell, date_added)
+            print("\nQuantity updated!")
         elif user_input == "D":
-            pass
+            print("\nOkay let's update the days per use!")
+            days_per_use = get_days_p_use()
+            days_cell = "C" + str((int(product_number) + 1))
+            sheet.update_acell(days_cell, days_per_use)
+            print("\nDays per use updated!")
         else:
             print("\nPlease enter an 'N', 'Q' or 'D'")
 
@@ -322,11 +330,10 @@ def format_stock_data(data):
 
         if product_number < 1:
             # add name and quantity column
-            quantity_and_days[0].pop(0)
             stock_data += "  " + product[0] + (19 - name_length) * " " + "|"
             stock_data += product[1] + (11 - qt_length) * " " + "|"
         else:
-            # add product number and name
+            # add product number, name and quantity
             stock_data += f"{product_number} "
             stock_data += product[0] + (19 - name_length) * " " + "|"
             stock_data += str(
@@ -334,6 +341,7 @@ def format_stock_data(data):
                 10 - (
                     qt_length + new_qt_length)
                     ) * " " + "|"
+            quantity_and_days[0].pop(0)
         for ind in range(2, sheet_length):
             # add days p use, date added and in case of food sheet, expiry date
             stock_data += product[ind] + (11 - len(product[ind])) * " " + "|"
@@ -420,5 +428,7 @@ def main_function():
 
 
 main_function()
+# floepie = calculate_quantity_and_days_left(food.get_all_values())
+# print(floepie)
 
 # 1. Add function to edit quantity and expiry date of product
