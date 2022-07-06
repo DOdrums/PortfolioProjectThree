@@ -149,8 +149,8 @@ def delete_product(sheet):
     products_to_delete = [int(x) for x in products_to_delete]
     products_to_delete.sort(reverse=True)
     for number in products_to_delete:
-        if number != 1:
-            sheet.delete_rows(number)
+        if number != 0:
+            sheet.delete_rows(number + 1)
     display_stock_data()
 
 
@@ -164,13 +164,17 @@ def display_stock_data():
     data_food = ""
     data_item_raw = item.get_all_values()
     data_item = ""
+
     quantity_and_days = calculate_quantity_left(data_food_raw)
-    i = 1
+    i = 0
 
     for product in data_food_raw:
-        data_food += f"{i} "
-        data_food += product[0] + (19 - len(product[0])) * " " + "|"
-        if i > 1:
+        if i > 0:
+            data_food += f"{i} "
+            data_food += product[0] + (19 - len(product[0])) * " " + "|"
+        else:
+            data_food += "  " + product[0] + (19 - len(product[0])) * " " + "|"
+        if i > 0:
             data_food += str(
                 quantity_and_days[0][0]) + "/" + product[1] + (
                 10 - (
@@ -181,7 +185,7 @@ def display_stock_data():
             data_food += product[1] + (11 - len(product[1])) * " " + "|"
         for data in range(2, 5):
             data_food += product[data] + (11 - len(product[data])) * " " + "|"
-        if i < 2:
+        if i < 1:
             data_food += "Days left"
         else:
             data_food += str(quantity_and_days[1][0])
@@ -190,11 +194,15 @@ def display_stock_data():
         i += 1
 
     quantity_and_days = calculate_quantity_left(data_item_raw)
-    i = 1
+    i = 0
+
     for product in data_item_raw:
-        data_item += f"{i} "
-        data_item += product[0] + (19 - len(product[0])) * " " + "|"
-        if i > 1:
+        if i > 0:
+            data_item += f"{i} "
+            data_item += product[0] + (19 - len(product[0])) * " " + "|"
+        else:
+            data_item += "  " + product[0] + (19 - len(product[0])) * " " + "|"
+        if i > 0:
             data_item += str(
                 quantity_and_days[0][0]) + "/" + product[1] + (
                 10 - (
@@ -205,7 +213,7 @@ def display_stock_data():
             data_item += product[1] + (11 - len(product[1])) * " " + "|"
         for data in range(2, 4):
             data_item += product[data] + (11 - len(product[data])) * " " + "|"
-        if i < 2:
+        if i < 1:
             data_item += "Days left"
         else:
             data_item += str(quantity_and_days[1][0])
@@ -223,21 +231,30 @@ def display_stock_data():
         f" to the start of the program or 'Q' to exit:"
     )
 
-    user_input = input().upper()
-    if user_input == "D":
-        item_or_food = ""
-        print(
-            "Do you want to delete a product from the item or food list(I/F)?"
-        )
-        item_or_food = input().upper()
-        if item_or_food == "I":
-            delete_product(item)
-        elif item_or_food == "F":
-            delete_product(food)
-    elif user_input == "R":
-        main_function()
-    elif user_input == "Q":
-        pass
+    valid_input = ["D", "R", "Q"]
+    user_input = ""
+    while user_input not in valid_input:
+        user_input = input().upper()
+        if user_input == "D":
+            item_or_food = ""
+            print(
+                "Do you want to delete a product from "
+                "the item or food list(I/F)?"
+            )
+            while item_or_food != "I" and item_or_food != "F":
+                item_or_food = input().upper()
+                if item_or_food == "I":
+                    delete_product(item)
+                elif item_or_food == "F":
+                    delete_product(food)
+                else:
+                    print("Please enter an 'I' or 'F'")
+        elif user_input == "R":
+            main_function()
+        elif user_input == "Q":
+            pass
+        else:
+            print("Please enter a 'D', 'R' or 'Q'")
 
 
 def calculate_quantity_left(sheet):
@@ -268,8 +285,7 @@ def calculate_quantity_left(sheet):
         quantity_left = (
             int(quantity[index]) - days_spend.days / int(days_p_use[index])
             )
-        if quantity_left < 0:
-            quantity_left = 0
+        quantity_left = max(quantity_left, 0)
         new_quantity.append(math.ceil(quantity_left))
         days = math.ceil(quantity_left) * int(days_p_use[index])
         days_left.append(days)
@@ -277,9 +293,6 @@ def calculate_quantity_left(sheet):
     quantity_and_days_left.append(new_quantity)
     quantity_and_days_left.append(days_left)
     return quantity_and_days_left
-    # current date - date added = days spend
-    # quantity - round(days spend / days per use) = quantity left
-    # quantity left * days per use = days left
 
 
 def main_function():
@@ -309,8 +322,4 @@ def main_function():
 
 main_function()
 
-# 1. make seperate function for calculating days left/items
-# left (called by get stock data function)
-# 2. for calculating the days left, data added needs to be converted back
-# to datetime object
-# 3. Add function to edit quantity and expiry date of product
+# 1. Add function to edit quantity and expiry date of product
