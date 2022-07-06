@@ -61,7 +61,7 @@ def make_product():
     it to google sheet database.
     """
     food_or_item = ""
-    name = ""
+    name = "1234567890123456789"
     quantity = ""
     days_per_item = ""
 
@@ -69,11 +69,15 @@ def make_product():
         # check if answer if F or I
         print("Do you want to add food or an item? Please enter 'F' or 'I':")
         food_or_item = input().upper()
+
     print(
         "What is the name of your product (max 18 charachters)?\n"
         ".................."
         )
-    name = input()
+    while len(name) > 18:
+        name = input()
+        if len(name) > 18:
+            print("Please enter a name with a max length of 18 charachters")
 
     while not quantity.isdigit():
         # check if quantity is digit
@@ -121,13 +125,18 @@ def make_product():
         "to the start of the program or 'Q' to exit:"
     )
 
-    user_input = input().upper()
-    if user_input == "A":
-        make_product()
-    elif user_input == "R":
-        main_function()
-    elif user_input == "Q":
-        pass
+    valid_input = ["A", "R", "Q"]
+    user_input = ""
+    while user_input not in valid_input:
+        user_input = input().upper()
+        if user_input == "A":
+            make_product()
+        elif user_input == "R":
+            main_function()
+        elif user_input == "Q":
+            pass
+        else:
+            print("Please enter a 'A', 'R' or 'Q'")
 
 
 def delete_product():
