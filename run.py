@@ -107,15 +107,14 @@ def make_product():
         # item_item.add_product()
     print("Add product(Y/N)")
     user_add_y_n = ""
-    while user_add_y_n != "Y" or "N":
+    while user_add_y_n != "Y" or user_add_y_n != "N":
         user_add_y_n = input().upper()
         if user_add_y_n == "Y":
             item_item.add_product()
             break
-        elif user_add_y_n == "N":
+        if user_add_y_n == "N":
             break
-        else:
-            print("Please enter 'Y' or 'N'")
+        print("Please enter 'Y' or 'N'")
 
     print(
         "Hit 'A' to add another product, 'R' to return\n"
@@ -131,11 +130,25 @@ def make_product():
         pass
 
 
-def delete_product(sheet):
+def delete_product():
     """
     deletes products from the sheet by row number
     it's possible for user to delete multiple rows at once
     """
+    item_or_food = ""
+    sheet = ""
+    print(
+        "Do you want to delete a product from "
+        "the item or food list(I/F)?"
+    )
+    while item_or_food != "I" and item_or_food != "F":
+        item_or_food = input().upper()
+        if item_or_food == "I":
+            sheet = item
+        elif item_or_food == "F":
+            sheet = food
+        else:
+            print("Please enter an 'I' or 'F'")
     products_to_delete = ""
     is_numbers = False
     while not is_numbers:
@@ -161,65 +174,9 @@ def display_stock_data():
     new_line = '\n'
 
     data_food_raw = food.get_all_values()
-    data_food = ""
+    data_food = format_stock_data(data_food_raw)
     data_item_raw = item.get_all_values()
-    data_item = ""
-
-    quantity_and_days = calculate_quantity_left(data_food_raw)
-    i = 0
-
-    for product in data_food_raw:
-        if i > 0:
-            data_food += f"{i} "
-            data_food += product[0] + (19 - len(product[0])) * " " + "|"
-        else:
-            data_food += "  " + product[0] + (19 - len(product[0])) * " " + "|"
-        if i > 0:
-            data_food += str(
-                quantity_and_days[0][0]) + "/" + product[1] + (
-                10 - (
-                    len(str(product[1])) + len(str(quantity_and_days[0][0])))
-                    ) * " " + "|"
-            quantity_and_days[0].pop(0)
-        else:
-            data_food += product[1] + (11 - len(product[1])) * " " + "|"
-        for data in range(2, 5):
-            data_food += product[data] + (11 - len(product[data])) * " " + "|"
-        if i < 1:
-            data_food += "Days left"
-        else:
-            data_food += str(quantity_and_days[1][0])
-            quantity_and_days[1].pop(0)
-        data_food += f"{new_line}"
-        i += 1
-
-    quantity_and_days = calculate_quantity_left(data_item_raw)
-    i = 0
-
-    for product in data_item_raw:
-        if i > 0:
-            data_item += f"{i} "
-            data_item += product[0] + (19 - len(product[0])) * " " + "|"
-        else:
-            data_item += "  " + product[0] + (19 - len(product[0])) * " " + "|"
-        if i > 0:
-            data_item += str(
-                quantity_and_days[0][0]) + "/" + product[1] + (
-                10 - (
-                    len(str(product[1])) + len(str(quantity_and_days[0][0])))
-                    ) * " " + "|"
-            quantity_and_days[0].pop(0)
-        else:
-            data_item += product[1] + (11 - len(product[1])) * " " + "|"
-        for data in range(2, 4):
-            data_item += product[data] + (11 - len(product[data])) * " " + "|"
-        if i < 1:
-            data_item += "Days left"
-        else:
-            data_item += str(quantity_and_days[1][0])
-            quantity_and_days[1].pop(0)
-        data_item += f"{new_line}"
-        i += 1
+    data_item = format_stock_data(data_item_raw)
 
     print(
         f"{new_line}"
@@ -236,19 +193,7 @@ def display_stock_data():
     while user_input not in valid_input:
         user_input = input().upper()
         if user_input == "D":
-            item_or_food = ""
-            print(
-                "Do you want to delete a product from "
-                "the item or food list(I/F)?"
-            )
-            while item_or_food != "I" and item_or_food != "F":
-                item_or_food = input().upper()
-                if item_or_food == "I":
-                    delete_product(item)
-                elif item_or_food == "F":
-                    delete_product(food)
-                else:
-                    print("Please enter an 'I' or 'F'")
+            delete_product()
         elif user_input == "R":
             main_function()
         elif user_input == "Q":
@@ -257,7 +202,52 @@ def display_stock_data():
             print("Please enter a 'D', 'R' or 'Q'")
 
 
-def calculate_quantity_left(sheet):
+def format_stock_data(data):
+    """
+    format the raw stock data so the display stock data function
+    can display it in a neat table
+    """
+    new_line = '\n'
+    stock_data = ""
+    product_number = 0
+    quantity_and_days = calculate_quantity_and_days_left(data)
+    for product in data:
+        # loop trough each row of google sheet and manipulate
+        # data into a string
+        sheet_length = len(product)
+        name_length = len(product[0])
+        new_qt_length = len(str(quantity_and_days[0][0]))
+        qt_length = len(product[1])
+
+        if product_number < 1:
+            # add name and quantity column
+            quantity_and_days[0].pop(0)
+            stock_data += "  " + product[0] + (19 - name_length) * " " + "|"
+            stock_data += product[1] + (11 - qt_length) * " " + "|"
+        else:
+            # add product number and name
+            stock_data += f"{product_number} "
+            stock_data += product[0] + (19 - name_length) * " " + "|"
+            stock_data += str(
+                quantity_and_days[0][0]) + "/" + product[1] + (
+                10 - (
+                    qt_length + new_qt_length)
+                    ) * " " + "|"
+        for ind in range(2, sheet_length):
+            # add days p use, date added and in case of food sheet, expiry date
+            stock_data += product[ind] + (11 - len(product[ind])) * " " + "|"
+        if product_number < 1:
+            # add days left
+            stock_data += "Days left"
+        else:
+            stock_data += str(quantity_and_days[1][0])
+            quantity_and_days[1].pop(0)
+        stock_data += f"{new_line}"
+        product_number += 1
+    return stock_data
+
+
+def calculate_quantity_and_days_left(sheet):
     """
     function to calculate the days left until user
     runs out of a product.
@@ -268,17 +258,23 @@ def calculate_quantity_left(sheet):
     expiry_date = []
     length = len(sheet)
     length_items = len(sheet[0])
+
     for product in range(1, length):
+        # put quantity, days per use and data added in seperate lists
         quantity.append(sheet[product][1])
         days_p_use.append(sheet[product][2])
         date_added.append(sheet[product][3])
         if length_items > 4:
             expiry_date.append(sheet[product][4])
+
     current_date = datetime.date.today()
     length -= 1
     new_quantity = []
     days_left = []
+
     for index in range(length):
+        # calculate the new quantity by dividing the days spend by days per use
+        # and subtracting that from the original quantity
         days_spend = current_date - datetime.datetime.strptime(
             date_added[index], "%Y-%m-%d"
             ).date()
@@ -287,8 +283,10 @@ def calculate_quantity_left(sheet):
             )
         quantity_left = max(quantity_left, 0)
         new_quantity.append(math.ceil(quantity_left))
+        # calculate days left by multiplying quantity left with days per use
         days = math.ceil(quantity_left) * int(days_p_use[index])
         days_left.append(days)
+
     quantity_and_days_left = []
     quantity_and_days_left.append(new_quantity)
     quantity_and_days_left.append(days_left)
