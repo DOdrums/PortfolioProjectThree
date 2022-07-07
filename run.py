@@ -19,6 +19,21 @@ food = SHEET.worksheet("food")
 item = SHEET.worksheet("item")
 
 
+class Colors:
+    """
+    A class with colors to style the text in the terminal
+    """
+    hr = '\033[95m'
+    bl = '\033[94m'
+    cy = '\033[96m'
+    gr = '\033[92m'
+    wrn = '\033[93m'
+    f = '\033[91m'
+    end = '\033[0m'
+    bld = '\033[1m'
+    und = '\033[4m'
+
+
 class Product:
     """
     Class to initialise a product
@@ -384,10 +399,18 @@ def format_stock_data(data):
         # data into a string
         if product_number < 1:
             # add name and quantity column
-            stock_data += "  " + product[0] + (19 - name_length) * " " + "|"
-            stock_data += product[1] + (11 - qt_length) * " " + "|"
+            # stock_data += f"' ' {product[0]}{(19 - name_length) * qt_length}"
+            # stock_data += "  " + product[0] + (19 - name_length) * " " + "|"
+            stock_data += (
+                Colors.und + "  " + product[0] + (19 - name_length) * " " + "|"
+                + Colors.end
+                )
+            stock_data += (
+                Colors.und + product[1] + (11 - qt_length) * " " + "|"
+                + Colors.end
+                )
         else:
-            # add product number, name and quantity
+            # add product number, name and quantity data
             stock_data += f"{product_number} "
             stock_data += product[0] + (
                 20 - name_length - len(str(product_number))) * " " + "|"
@@ -399,10 +422,18 @@ def format_stock_data(data):
             quantity_and_days[0].pop(0)
         for ind in range(2, sheet_length):
             # add days p use, date added and in case of food sheet, expiry date
-            stock_data += product[ind] + (11 - len(product[ind])) * " " + "|"
+            if product_number < 1:
+                stock_data += (
+                    Colors.und + product[ind] + (11 - len(product[ind])) *
+                    " " + "|" + Colors.end
+                    )
+            else:
+                stock_data += (
+                    product[ind] + (11 - len(product[ind])) * " " + "|"
+                    )
         if product_number < 1:
             # add days left column
-            stock_data += "Days left"
+            stock_data += Colors.und + "Days left" + Colors.end
         else:
             # add days left data
             stock_data += str(quantity_and_days[1][0])
@@ -463,7 +494,9 @@ def main_function():
     main function of the program, asks user to see inventory or add a product.
     """
     print(
-        "\nWelcome to your Smart House Inventory!\n\n"
+        Colors.hr + "\nWelcome to your Smart House Inventory!\n" + Colors.end
+        )
+    print(
         "With this program, you can track all the products in your house and "
         "fridge.\nYou can see things like the current quantity of a product, "
         "\nit's expiry date and the date you added the product."
