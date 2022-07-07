@@ -236,6 +236,8 @@ def edit_product():
         else:
             print("\nPlease enter an 'N', 'Q' or 'D'")
 
+    display_stock_data()
+
 
 def delete_product():
     """
@@ -414,17 +416,22 @@ def main_function():
         "Smart House Inventory\ncan calculate when you'll run out of it!\n"
         )
     print(
-        "Do you want to see/edit your inventory ('I') or add a product ('P')?"
-        )
-    answer = input().upper()
-    if answer == "I":
-        display_stock_data()
-    elif answer == "P":
-        print("Cool let's add a product!")
-        make_product()
-    else:
-        print("Please enter an 'I' or a 'P'")
-        main_function()
+        "Hit 'I' to see/edit your inventory, 'P' to add a product\n"
+        "or 'Q' to exit the program:"
+    )
+    answer = ""
+    valid_answers = ["I", "P", "Q"]
+    while answer not in valid_answers:
+        answer = input().upper()
+        if answer == "I":
+            display_stock_data()
+        elif answer == "P":
+            print("Cool let's add a product!")
+            make_product()
+        elif answer == "Q":
+            break
+        else:
+            print("Please enter an 'I', 'P' or 'Q'")
 
 
 main_function()
