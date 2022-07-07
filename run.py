@@ -286,6 +286,8 @@ def delete_product():
     products_to_delete = [int(x) for x in products_to_delete]
     products_to_delete.sort(reverse=True)
     for number in products_to_delete:
+        # delete (all) product(s), making sure
+        # the first column doesn't get deleted
         if number != 0:
             sheet.delete_rows(number + 1)
     print("\nProducts deleted!")
@@ -298,24 +300,59 @@ def display_stock_data():
     """
     new_line = '\n'
 
+    # get the data from the google sheet and format it
     data_food_raw = food.get_all_values()
     data_food = format_stock_data(data_food_raw)
     data_item_raw = item.get_all_values()
     data_item = format_stock_data(data_item_raw)
 
+    inventory_explantion = (
+        f"{new_line}Name: the name of your product."
+        f"{new_line}"
+        f"{new_line}Quantity: the quantity of your product. Fill this in any"
+        f"{new_line}way you'd like! For example: 2 bags of pasta, 2 containers"
+        f"{new_line}of bacon or even 10 slices of bacon. The quantity of your"
+        f"{new_line}product is used to calculate how many days there are left"
+        f"{new_line}before you run out of the product, so enter this value in"
+        f"{new_line}the way that's most useful to you! It will then show your"
+        f"{new_line}estimated current quantity and orignal quantity seperated"
+        f"{new_line}by a slash"
+        f"{new_line}"
+        f"{new_line}Days p(er) Use: this value simply describes how many days"
+        f"{new_line}it takes to finish 1 item of your product. So if you"
+        f"{new_line}usually spend 10 days to finish one bag of pasta, your"
+        f"{new_line}days per use is 10."
+        f"{new_line}"
+        f"{new_line}Date Added: this is the date you added a product. This"
+        f"{new_line}value is generated automatically when you add a new "
+        f"product."
+        f"{new_line}"
+        f"{new_line}Expiry Date: this is the expiry date of your product."
+        f"{new_line}"
+        f"{new_line}Days left: this is the amount of days that are left"
+        f"{new_line}before you run out of the product. Since it is an estimate"
+        f"{new_line}the accuracy will depend on if the Days p Use is realistic"
+        f"{new_line}"
+        )
+
     print(
+        # print the entire inventory
+        f"{inventory_explantion}"
         f"{new_line}"
         f"These are all the items you have in your house:{2 * new_line}"
         f"{data_item}{new_line}"
         f"This is all the food you have in your house:{2 * new_line}"
         f"{data_food}{new_line}"
-        f"Hit 'E' to edit an item, 'D' to delete an item, 'R' to return"
-        f"{new_line}to the start of the program or 'Q' to exit:"
+        f"{new_line}Scroll up to see an explanation of the inventory"
+        f"{2 * new_line}"
+        f"Hit 'E' to edit an item, 'D' to delete an item,"
+        f"{new_line}'R' to return to the start of the program or 'Q' to exit:"
     )
 
     valid_input = ["E", "D", "R", "Q"]
     user_input = ""
     while user_input not in valid_input:
+        # ask user what they want to do next and validate their input
         user_input = input().upper()
         if user_input == "E":
             edit_product()
@@ -339,13 +376,12 @@ def format_stock_data(data):
     product_number = 0
     quantity_and_days = calculate_quantity_and_days_left(data)
     for product in data:
-        # loop trough each row of google sheet and manipulate
-        # data into a string
         sheet_length = len(product)
         name_length = len(product[0])
         new_qt_length = len(str(quantity_and_days[0][0]))
         qt_length = len(product[1])
-
+        # loop trough each row of google sheet and manipulate
+        # data into a string
         if product_number < 1:
             # add name and quantity column
             stock_data += "  " + product[0] + (19 - name_length) * " " + "|"
@@ -365,9 +401,10 @@ def format_stock_data(data):
             # add days p use, date added and in case of food sheet, expiry date
             stock_data += product[ind] + (11 - len(product[ind])) * " " + "|"
         if product_number < 1:
-            # add days left
+            # add days left column
             stock_data += "Days left"
         else:
+            # add days left data
             stock_data += str(quantity_and_days[1][0])
             quantity_and_days[1].pop(0)
         stock_data += f"{new_line}"
@@ -428,17 +465,19 @@ def main_function():
     print(
         "\nWelcome to your Smart House Inventory!\n\n"
         "With this program, you can track all the products in your house and "
-        "fridge,\nand see when you'd have to restock an item! When adding"
-        " a product,\nmake sure to enter a realistic 'days per use', so the "
-        "Smart House Inventory\ncan calculate when you'll run out of it!\n"
+        "fridge.\nYou can see things like the current quantity of a product, "
+        "\nit's expiry date and the date you added the product."
+        "\nYou can even see when you will likely run out af a product!"
+        "\nMore info can be found when opening your inventory.\n"
         )
     print(
-        "Hit 'I' to see/edit your inventory, 'P' to add a product\n"
-        "or 'Q' to exit the program:"
+        "Hit 'I' to see/edit your inventory, 'P' to add a product or"
+        "\n'Q' to exit the program:"
     )
     answer = ""
     valid_answers = ["I", "P", "Q"]
     while answer not in valid_answers:
+        # ask user what they want to do and validate answer
         answer = input().upper()
         if answer == "I":
             display_stock_data()
@@ -452,7 +491,3 @@ def main_function():
 
 
 main_function()
-# floepie = calculate_quantity_and_days_left(food.get_all_values())
-# print(floepie)
-
-# 1. Add function to edit quantity and expiry date of product
