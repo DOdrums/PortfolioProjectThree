@@ -353,7 +353,8 @@ def format_stock_data(data):
         else:
             # add product number, name and quantity
             stock_data += f"{product_number} "
-            stock_data += product[0] + (19 - name_length) * " " + "|"
+            stock_data += product[0] + (
+                20 - name_length - len(str(product_number))) * " " + "|"
             stock_data += str(
                 quantity_and_days[0][0]) + "/" + product[1] + (
                 10 - (
