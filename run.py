@@ -21,7 +21,7 @@ item = SHEET.worksheet("item")
 
 class Product:
     """
-    class to initialise a product
+    Class to initialise a product
     can be either Food or Item.
     """
     def __init__(self, name, quantity, days_per):
@@ -41,13 +41,11 @@ class Product:
             item.append_row(data)
         elif len(data) == 5:
             food.append_row(data)
-        else:
-            print("Your list doesn't seem to have the right amount of items!")
 
 
 class Food(Product):
     """
-    Food class that subclasses the product class
+    Food class that subclasses the Product class,
     inherits all variables and adds expiry variable.
     """
     def __init__(self, name, quantity, days_per, expiry_date):
@@ -57,7 +55,7 @@ class Food(Product):
 
 def get_name():
     """
-    function to get name of product from user
+    Function to get name of product from user
     """
     name = "1234567890123456789"
     print(
@@ -65,10 +63,11 @@ def get_name():
         ".................."
     )
     while len(name) > 18:
+        # check if name doesn't exceed the max length
         name = input()
         if len(name) > 18:
             print(
-                "\nPlease enter a name with a max length of 18 charachters:\n"
+                "Please enter a name with a max length of 18 charachters:\n"
                 ".................."
                 )
     return name
@@ -76,13 +75,13 @@ def get_name():
 
 def get_quantity():
     """
-    function to get quantity of product from user
+    Function to get quantity of product from user
     """
     quantity = ""
+    print("\nHow many items does your product contain?\n")
     while not quantity.isdigit():
         # check if quantity is digit
         print(
-            "\nHow many items does your product contain?\n"
             "Please enter a whole number:"
             )
         quantity = input()
@@ -91,13 +90,13 @@ def get_quantity():
 
 def get_days_p_use():
     """
-    function to get days per use of product from user
+    Function to get days per use of product from user
     """
     days_per_item = ""
+    print("\nHow many days does it take to use up 1 item of your product?\n")
     while not days_per_item.isdigit():
         # check if days per item is digit
         print(
-            "\nHow many days does it take to use up 1 item?\n"
             "Please enter a whole number:"
             )
         days_per_item = input()
@@ -106,12 +105,13 @@ def get_days_p_use():
 
 def get_expiry_date():
     """
-    function to get expiry date of product from user
+    Function to get expiry date of product from user
     """
     print("\nWhen does the product expire (yyyy-mm-dd)?")
     expiry = input()
     date_regex = r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
     while re.fullmatch(date_regex, expiry) is None:
+        # compate regex to entered date, to see if date is in valid format
         print("\nPlease enter expiry date in format yyyy-mm-dd:")
         expiry = input()
     return expiry
@@ -123,37 +123,37 @@ def make_product():
     it to google sheet database.
     """
     food_or_item = ""
-
+    print("\nDo you want to add food or an item (F/I)?")
     while food_or_item != "F" and food_or_item != "I":
-        # check if answer if F or I
-        print("\nDo you want to add food or an item? Please enter 'F' or 'I':")
+        # check if answer is F or I
         food_or_item = input().upper()
+        if food_or_item != "F" and food_or_item != "I":
+            print("\nPlease enter 'F' or 'I':")
 
     name = get_name()
     quantity = get_quantity()
     days_per_item = get_days_p_use()
 
     if food_or_item == "F":
-        # if food, ask for date and validate it
-        # than create istance of food and add to sheet
+        # if food, get expiry date and than
+        # create istance of food
         expiry = get_expiry_date()
-        item_item = Food(name, int(quantity), int(days_per_item), expiry)
+        product = Food(name, int(quantity), int(days_per_item), expiry)
     elif food_or_item == "I":
-        # if item, create instance of product and add to sheet
-        item_item = Product(name, int(quantity), int(days_per_item))
-        # item_item.add_product()
-    print("\nAdd product(Y/N)")
+        # if item, create instance of product
+        product = Product(name, int(quantity), int(days_per_item))
+
+    print("\nAdd product (Y/N)?")
     user_add_y_n = ""
-    while user_add_y_n != "Y" or user_add_y_n != "N":
+    while user_add_y_n != "Y" and user_add_y_n != "N":
         user_add_y_n = input().upper()
         if user_add_y_n == "Y":
-            item_item.add_product()
+            product.add_product()
             print("\nProduct added!")
-            break
-        if user_add_y_n == "N":
+        elif user_add_y_n == "N":
             print("\nProduct not added!")
-            break
-        print("\nPlease enter 'Y' or 'N'")
+        else:
+            print("\nPlease enter 'Y' or 'N'")
 
     print(
         "\nHit 'A' to add another product, 'R' to return\n"
@@ -171,7 +171,7 @@ def make_product():
         elif user_input == "Q":
             pass
         else:
-            print("\nPlease enter a 'A', 'R' or 'Q'")
+            print("\nPlease enter an 'A', 'R' or 'Q'")
 
 
 def edit_product():
@@ -426,7 +426,7 @@ def main_function():
         if answer == "I":
             display_stock_data()
         elif answer == "P":
-            print("Cool let's add a product!")
+            print("\nCool let's add a product!")
             make_product()
         elif answer == "Q":
             break
