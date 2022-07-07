@@ -146,6 +146,7 @@ def make_product():
     print("\nAdd product (Y/N)?")
     user_add_y_n = ""
     while user_add_y_n != "Y" and user_add_y_n != "N":
+        # give user the option to add product or not
         user_add_y_n = input().upper()
         if user_add_y_n == "Y":
             product.add_product()
@@ -163,6 +164,7 @@ def make_product():
     valid_input = ["A", "R", "Q"]
     user_input = ""
     while user_input not in valid_input:
+        # give user muliple options after adding product
         user_input = input().upper()
         if user_input == "A":
             make_product()
@@ -182,9 +184,10 @@ def edit_product():
     sheet = ""
     print(
         "\nDo you want to edit a product from "
-        "the item or food list(I/F)?"
+        "the food or item list(F/I)?"
     )
     while item_or_food != "I" and item_or_food != "F":
+        # check if answer is F or I
         item_or_food = input().upper()
         if item_or_food == "I":
             sheet = item
@@ -196,6 +199,7 @@ def edit_product():
     print("\nWhich product you want to edit?")
     product_number = 0
     while product_number < 1:
+        # get product number from user
         print("\nPlease enter the product number as listed in the inventory:")
         product_number = int(input())
 
@@ -203,24 +207,30 @@ def edit_product():
     user_input = ""
     print(
         "\nDo you want to edit the name, quantity "
-        "or days per use ('N', 'Q' or 'D')?"
+        "or days per use of your product ('N', 'Q' or 'D')?"
         )
     while user_input not in valid_input:
+        # get answer from user to which value they want to edit
         user_input = input().upper()
         if user_input == "N":
+            # get name and update name in google sheet
             print("\nOkay let's update the name!")
             name = get_name()
             name_cell = "A" + str((int(product_number) + 1))
             sheet.update_acell(name_cell, name)
             print("\nName updated!")
         elif user_input == "Q":
+            # get quantity and automatically update date added as well
+            # if product is food, ask for and update expiry as well
             print("\nOkay let's update the quantity!")
             quantity = get_quantity()
+
             if item_or_food == "F":
                 print("\nWe should also update the expiry date!")
                 expiry = "'" + get_expiry_date()
                 expiry_cell = "E" + str((int(product_number) + 1))
                 sheet.update_acell(expiry_cell, expiry)
+
             qt_cell = "B" + str((int(product_number) + 1))
             sheet.update_acell(qt_cell, quantity)
             date_added = "'" + str(datetime.date.today())
@@ -228,6 +238,7 @@ def edit_product():
             sheet.update_acell(date_cell, date_added)
             print("\nQuantity updated!")
         elif user_input == "D":
+            # get and update the days per use in google sheet
             print("\nOkay let's update the days per use!")
             days_per_use = get_days_p_use()
             days_cell = "C" + str((int(product_number) + 1))
@@ -251,6 +262,7 @@ def delete_product():
         "the item or food list(I/F)?"
     )
     while item_or_food != "I" and item_or_food != "F":
+        # check if answer is F or I
         item_or_food = input().upper()
         if item_or_food == "I":
             sheet = item
@@ -258,21 +270,25 @@ def delete_product():
             sheet = food
         else:
             print("Please enter an 'I' or 'F'")
+
     products_to_delete = ""
     is_numbers = False
+    print("Which products do you want to delete?")
     while not is_numbers:
+        # verify if string entered is filled with digits
         print(
-            "Which products do you want to delete? "
-            "Please enter the numbers, seperated by comma's "
-            "(for example: 2,4,7)"
+            "Please enter the product numbers, seperated by comma's "
+            "and without spaces (for example: 2,4,7)"
         )
         products_to_delete = input().split(",")
         is_numbers = all(item.isdigit() for item in products_to_delete)
+
     products_to_delete = [int(x) for x in products_to_delete]
     products_to_delete.sort(reverse=True)
     for number in products_to_delete:
         if number != 0:
             sheet.delete_rows(number + 1)
+    print("\nProducts deleted!")
     display_stock_data()
 
 
