@@ -199,7 +199,7 @@ def edit_product():
     sheet = ""
     print(
         "\nDo you want to edit a product from "
-        "the food or item list(F/I)\n?"
+        "the food or item list(F/I)?\n"
     )
     while item_or_food != "I" and item_or_food != "F":
         # check if answer is F or I
@@ -224,7 +224,7 @@ def edit_product():
     user_input = ""
     print(
         "\nDo you want to edit the name, quantity "
-        "or days per use of your product ('N', 'Q' or 'D')?\n"
+        "or days per use of your product (N/Q/D)?\n"
         )
     while user_input not in valid_input:
         # get answer from user to which value they want to edit
@@ -294,7 +294,7 @@ def delete_product():
     while not is_numbers:
         # verify if string entered is filled with digits
         print(
-            "Please enter the product numbers, seperated by comma's "
+            "Please enter the product numbers, seperated by comma's\n"
             "and without spaces (for example: 2,4,7)\n"
         )
         products_to_delete = input().split(",")
