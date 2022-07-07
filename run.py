@@ -75,7 +75,7 @@ def get_name():
     name = "1234567890123456789"
     print(
         "\nWhat is the name of your product (max 18 charachters)?\n"
-        ".................."
+        "..................\n"
     )
     while len(name) > 18:
         # check if name doesn't exceed the max length
@@ -83,7 +83,7 @@ def get_name():
         if len(name) > 18:
             print(
                 "Please enter a name with a max length of 18 charachters:\n"
-                ".................."
+                "..................\n"
                 )
     return name
 
@@ -97,7 +97,7 @@ def get_quantity():
     while not quantity.isdigit():
         # check if quantity is digit
         print(
-            "Please enter a whole number:"
+            "Please enter a whole number:\n"
             )
         quantity = input()
     return quantity
@@ -112,7 +112,7 @@ def get_days_p_use():
     while not days_per_item.isdigit():
         # check if days per item is digit
         print(
-            "Please enter a whole number:"
+            "Please enter a whole number:\n"
             )
         days_per_item = input()
     return days_per_item
@@ -122,12 +122,12 @@ def get_expiry_date():
     """
     Function to get expiry date of product from user
     """
-    print("\nWhen does the product expire (yyyy-mm-dd)?")
+    print("\nWhen does the product expire (yyyy-mm-dd)?\n")
     expiry = input()
     date_regex = r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
     while re.fullmatch(date_regex, expiry) is None:
         # compate regex to entered date, to see if date is in valid format
-        print("\nPlease enter expiry date in format yyyy-mm-dd:")
+        print("\nPlease enter expiry date in format yyyy-mm-dd:\n")
         expiry = input()
     return expiry
 
@@ -138,12 +138,12 @@ def make_product():
     it to google sheet database.
     """
     food_or_item = ""
-    print("\nDo you want to add food or an item (F/I)?")
+    print("\nDo you want to add food or an item (F/I)?\n")
     while food_or_item != "F" and food_or_item != "I":
         # check if answer is F or I
         food_or_item = input().upper()
         if food_or_item != "F" and food_or_item != "I":
-            print("\nPlease enter 'F' or 'I':")
+            print("\nPlease enter 'F' or 'I':\n")
 
     name = get_name()
     quantity = get_quantity()
@@ -158,7 +158,7 @@ def make_product():
         # if item, create instance of product
         product = Product(name, int(quantity), int(days_per_item))
 
-    print("\nAdd product (Y/N)?")
+    print("\nAdd product (Y/N)?\n")
     user_add_y_n = ""
     while user_add_y_n != "Y" and user_add_y_n != "N":
         # give user the option to add product or not
@@ -169,11 +169,11 @@ def make_product():
         elif user_add_y_n == "N":
             print("\nProduct not added!")
         else:
-            print("\nPlease enter 'Y' or 'N'")
+            print("\nPlease enter 'Y' or 'N'\n")
 
     print(
         "\nHit 'A' to add another product, 'R' to return\n"
-        "to the start of the program or 'Q' to exit:"
+        "to the start of the program or 'Q' to exit:\n"
     )
 
     valid_input = ["A", "R", "Q"]
@@ -188,7 +188,7 @@ def make_product():
         elif user_input == "Q":
             pass
         else:
-            print("\nPlease enter an 'A', 'R' or 'Q'")
+            print("\nPlease enter an 'A', 'R' or 'Q'\n")
 
 
 def edit_product():
@@ -199,7 +199,7 @@ def edit_product():
     sheet = ""
     print(
         "\nDo you want to edit a product from "
-        "the food or item list(F/I)?"
+        "the food or item list(F/I)\n?"
     )
     while item_or_food != "I" and item_or_food != "F":
         # check if answer is F or I
@@ -209,20 +209,22 @@ def edit_product():
         elif item_or_food == "F":
             sheet = food
         else:
-            print("\nPlease enter an 'I' or 'F'")
+            print("\nPlease enter an 'I' or 'F'\n")
 
     print("\nWhich product you want to edit?")
     product_number = 0
     while product_number < 1:
         # get product number from user
-        print("\nPlease enter the product number as listed in the inventory:")
+        print(
+            "\nPlease enter the product number as listed in the inventory:\n"
+            )
         product_number = int(input())
 
     valid_input = ["N", "Q", "D"]
     user_input = ""
     print(
         "\nDo you want to edit the name, quantity "
-        "or days per use of your product ('N', 'Q' or 'D')?"
+        "or days per use of your product ('N', 'Q' or 'D')?\n"
         )
     while user_input not in valid_input:
         # get answer from user to which value they want to edit
@@ -260,7 +262,7 @@ def edit_product():
             sheet.update_acell(days_cell, days_per_use)
             print("\nDays per use updated!")
         else:
-            print("\nPlease enter an 'N', 'Q' or 'D'")
+            print("\nPlease enter an 'N', 'Q' or 'D'\n")
 
     display_stock_data()
 
@@ -274,7 +276,7 @@ def delete_product():
     sheet = ""
     print(
         "Do you want to delete a product from "
-        "the item or food list(I/F)?"
+        "the item or food list(I/F)?\n"
     )
     while item_or_food != "I" and item_or_food != "F":
         # check if answer is F or I
@@ -284,7 +286,7 @@ def delete_product():
         elif item_or_food == "F":
             sheet = food
         else:
-            print("Please enter an 'I' or 'F'")
+            print("Please enter an 'I' or 'F':\n")
 
     products_to_delete = ""
     is_numbers = False
@@ -293,7 +295,7 @@ def delete_product():
         # verify if string entered is filled with digits
         print(
             "Please enter the product numbers, seperated by comma's "
-            "and without spaces (for example: 2,4,7)"
+            "and without spaces (for example: 2,4,7)\n"
         )
         products_to_delete = input().split(",")
         is_numbers = all(item.isdigit() for item in products_to_delete)
@@ -373,6 +375,7 @@ def display_stock_data():
         f"{2 * new_line}"
         f"Hit 'E' to edit an item, 'D' to delete an item,"
         f"{new_line}'R' to return to the start of the program or 'Q' to exit:"
+        f"{new_line}"
     )
 
     valid_input = ["E", "D", "R", "Q"]
@@ -389,7 +392,7 @@ def display_stock_data():
         elif user_input == "Q":
             pass
         else:
-            print("Please enter an 'E', 'D', 'R' or 'Q'")
+            print("Please enter an 'E', 'D', 'R' or 'Q'\n")
 
 
 def format_stock_data(data):
@@ -511,12 +514,13 @@ def main_function():
         "With this program, you can track all the products in your house and "
         "fridge.\nYou can see things like the current quantity of a product, "
         "\nit's expiry date and the date you added the product."
-        "\nYou can even see when you will likely run out af a product!"
-        "\nMore info can be found when opening your inventory.\n"
+        "\nYou can even see when you will likely run out af a product!" +
+        Colors.cy + "\n\nMore info can be found when opening your inventory.\n"
+        + Colors.end
         )
     print(
         "Hit 'I' to see/edit your inventory, 'P' to add a product or"
-        "\n'Q' to exit the program:"
+        "\n'Q' to exit the program:\n"
     )
     answer = ""
     valid_answers = ["I", "P", "Q"]
@@ -531,7 +535,7 @@ def main_function():
         elif answer == "Q":
             break
         else:
-            print("Please enter an 'I', 'P' or 'Q'")
+            print("Please enter an 'I', 'P' or 'Q'\n")
 
 
 main_function()
