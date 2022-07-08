@@ -2,13 +2,13 @@
 
 ## Portfolio Project 3: Python Essentials
 
-![Multi screen mockup]()
+![Multi screen mockup](assets/images/mockup.png)
 
 This project is built as part of the Code Institute Full Stack Software Development course. For this course, Dirk Ornee had to built a third Portfolio Project. Inspired by the expired products in his fridge and the occasional lack of toilet paper in his bathroom, he decided to build a Smart House Inventory solution, that will keep track of all the products in his house.
 
 ## Live Site
 
-[Smart House Inventory]()
+[Smart House Inventory](https://smart-house-inventory.herokuapp.com/)
 
 ## Github Repository
 
