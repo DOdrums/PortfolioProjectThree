@@ -355,8 +355,8 @@ def display_stock_data():
         f"{new_line}{Colors.cy}Days left:{Colors.end}{new_line}"
         f"This is the amount of days that are left"
         f"{new_line}before you run out of the product. Since it is an "
-        f"{new_line}estimate, the accuracy will depend on if the Days p Use is"
-        f" realistic.{new_line}"
+        f"{new_line}estimate, the accuracy will depend on how realistic"
+        f" the days per use is.{new_line}"
         )
 
     print(
@@ -513,8 +513,8 @@ def main_function():
     print(
         "With this program, you can track all the products in your house and "
         "fridge.\nYou can see things like the current quantity of a product, "
-        "\nit's expiry date and the date you added the product."
-        "\nYou can even see when you will likely run out af a product!" +
+        "\nits expiry date and the date you added the product."
+        "\nYou can even see when you will likely run out of a product!" +
         Colors.cy + "\n\nMore info can be found when opening your inventory.\n"
         + Colors.end
         )
