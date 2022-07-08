@@ -23,6 +23,7 @@ class Colors:
     """
     A class with colors to style the text in the terminal
     """
+    # code taken from Stackoverflow (see readme)
     hr = '\033[95m'
     bl = '\033[94m'
     cy = '\033[96m'
@@ -127,6 +128,7 @@ def get_expiry_date():
     date_regex = r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
     while re.fullmatch(date_regex, expiry) is None:
         # compate regex to entered date, to see if date is in valid format
+        # regex code taken from 'regexland' (see readme)
         print("\nPlease enter expiry date in format yyyy-mm-dd:\n")
         expiry = input()
     return expiry
@@ -235,6 +237,7 @@ def edit_product():
             name = get_name()
             name_cell = "A" + str((int(product_number) + 1))
             sheet.update_acell(name_cell, name)
+            # code to update cell taken from youtube (see readme)
             print("\nName updated!")
         elif user_input == "Q":
             # get quantity and automatically update date added as well
@@ -293,6 +296,7 @@ def delete_product():
     print("Which products do you want to delete?")
     while not is_numbers:
         # verify if string entered is filled with digits
+        # code taken from datasciencepirachay (see readme)
         print(
             "Please enter the product numbers, seperated by comma's\n"
             "and without spaces (for example: 2,4,7)\n"
@@ -301,6 +305,7 @@ def delete_product():
         is_numbers = all(item.isdigit() for item in products_to_delete)
 
     products_to_delete = [int(x) for x in products_to_delete]
+    # code taken from finxter (see readme)
     products_to_delete.sort(reverse=True)
     for number in products_to_delete:
         # delete (all) product(s), making sure
@@ -488,6 +493,7 @@ def calculate_quantity_and_days_left(sheet):
         days_spend = current_date - datetime.datetime.strptime(
             date_added[index], "%Y-%m-%d"
             ).date()
+        # code taken from Stackoverflow (see readme)
         quantity_left = (
             int(quantity[index]) - days_spend.days / int(days_p_use[index])
             )
