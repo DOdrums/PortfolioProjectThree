@@ -421,12 +421,12 @@ def format_stock_data(data):
             # stock_data += f"' ' {product[0]}{(19 - name_length) * qt_length}"
             # stock_data += "  " + product[0] + (19 - name_length) * " " + "|"
             stock_data += (
-                Colors.und + "  " + product[0] + (19 - name_length) * " " + "|"
-                + Colors.end
+                Colors.und + "  " + product[0] + (19 - name_length) * " " +
+                "|" + Colors.end
                 )
             stock_data += (
-                Colors.und + product[1] + (11 - qt_length) * " " + "|"
-                + Colors.end
+                Colors.und + product[1] + (11 - qt_length) * " " +
+                "|" + Colors.end
                 )
         else:
             # add product number, name and quantity data
@@ -521,8 +521,8 @@ def main_function():
         "fridge.\nYou can see things like the current quantity of a product, "
         "\nits expiry date and the date you added the product."
         "\nYou can even see when you will likely run out of a product!" +
-        Colors.cy + "\n\nMore info can be found when opening your inventory.\n"
-        + Colors.end
+        Colors.cy + "\n\nMore info can be found when opening your "
+        "inventory.\n" + Colors.end
         )
     print(
         "Hit 'I' to see/edit your inventory, 'P' to add a product or"
