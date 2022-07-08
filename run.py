@@ -4,7 +4,7 @@ import re
 import gspread
 from google.oauth2.service_account import Credentials
 
-
+# API code taken from love sandwiches walk through project from Code Institute.
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",

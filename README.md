@@ -64,18 +64,43 @@ This page shows a short introduction of the app and gives you the option to eith
 
 [main page]()
 
-
+### Future Features
 
 ## Credits
 
 ### Code
 
+* [Love Sandwiches](https://github.com/DOdrums/walkthrough-love-sandwhiches-python) - a walk through project from Code Institute was
+used as general inspiration and for making the Google Sheets API work.
 * [Regexland](https://regexland.com/regex-dates/) - to validate the date input with regex
 * [datascienceparichay](https://datascienceparichay.com/article/python-check-list-contains-only-numbers/) - to check if a string/list of strings consists of digits
 * [finxter](https://blog.finxter.com/how-to-convert-a-string-list-to-an-integer-list-in-python/#:~:text=The%20most%20Pythonic%20way%20to,x%20built%2Din%20function.) - to convert a list of strings to a list of integers
 * [stackoverflow(answer from Shubham Naik)](https://stackoverflow.com/a/2803877/16545052) - to convert string date to datetime object
 * [youtube](https://www.youtube.com/watch?v=yPQ2Gk33b1U) - to edit/update specific cells in Google Sheet
 * [stackoverflow](https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal) - to style terminal text with colors
+
+### Images
+
+All images used in the readme are screenshots of the project and a multi device mock up generated with [mockup generator](https://techsini.com/multi-mockup/index.php)
+The app itself does not contain any images.
+
+### Technologies used
+
+[HTML](https://html.spec.whatwg.org/) - for the structure of the website and mocking of the terminal (written by Code Institute)
+
+[CSS](https://www.w3.org/Style/CSS/Overview.en.html) - to provide styling to the page.
+
+[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - for the structure of the website and mocking of the terminal (written by Code Institute)
+
+[Python](https://www.python.org/) - to write all the logic of the app.
+
+[Gitpod](https://www.gitpod.io/) - used to connect a browser based VScode to github.
+
+[Github](https://github.com/) - used for version control and deployment of the website.
+
+[Heroku](https://dashboard.heroku.com/) - to deploy the app.
+
+[Multi Device Website Mockup Generator](https://techsini.com/multi-mockup/index.php) - to create an image of the website shown on different devices.
 
 ## Testing
 
