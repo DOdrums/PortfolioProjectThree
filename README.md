@@ -50,6 +50,12 @@ I think a lot of people recognize the feeling of opening their fridge and findin
 
 The app is designed to have a good flow, with clear options explained in a short and concise way. Inventory explanations is purposefully put on top, so returning users don't have to scroll through it every time to get to their inventory. The inventory is fully editable and products can be added to both lists easily.
 
+### Logic
+
+A flowchart was created to make the business logic more clear and as a guide while buildig the project. Notably missing are the delete and edit function, since this flowchart was created at the start of the proces and not updated throughout.
+
+![flowchart](assets/images/flowchart.jpg)
+
 ### Color Scheme
 
 Although colors are used on a few lines of text, no real color scheme was used. The text displays either purple, cyan or white.
@@ -65,6 +71,20 @@ This page shows a short introduction of the app and gives you the option to eith
 [main page]()
 
 ### Future Features
+
+For this app there are two important future features that would greatly increase it's usability.
+
+#### Multi-user support
+
+Include a login page, so users can have their personal google sheet connected without forking the code into their own project. This would probably work better with a general database instead of google sheets though.
+
+#### Notifications
+
+It would be great if a user could enter their email, telephone number or other communication channel, to get notified whenever a product almost runs out. They could also set a daily (or other interval) mail with their inventory.
+
+#### Expiry date warning
+
+Last functionality that could be worthwhile, is to add a feature that notifies the user when the expiry date comes close. This could be either inside the inventory, or via mail/phone etc.
 
 ## Credits
 
