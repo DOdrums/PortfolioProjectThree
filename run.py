@@ -75,7 +75,7 @@ def get_name():
     """
     name = "1234567890123456789"
     print(
-        "\nWhat is the name of your product (max 18 charachters)?\n"
+        "\nWhat is the name of your product (max 18 characters)?\n"
         "..................\n"
     )
     while len(name) > 18:
@@ -83,7 +83,7 @@ def get_name():
         name = input()
         if len(name) > 18:
             print(
-                "Please enter a name with a max length of 18 charachters:\n"
+                "Please enter a name with a max length of 18 characters:\n"
                 "..................\n"
                 )
     return name
@@ -127,7 +127,7 @@ def get_expiry_date():
     expiry = input()
     date_regex = r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
     while re.fullmatch(date_regex, expiry) is None:
-        # compate regex to entered date, to see if date is in valid format
+        # compare regex to entered date, to see if date is in valid format
         # regex code taken from 'regexland' (see readme)
         print("\nPlease enter expiry date in format yyyy-mm-dd:\n")
         expiry = input()
@@ -153,7 +153,7 @@ def make_product():
 
     if food_or_item == "F":
         # if food, get expiry date and than
-        # create istance of food
+        # create instance of food
         expiry = get_expiry_date()
         product = Food(name, int(quantity), int(days_per_item), expiry)
     elif food_or_item == "I":
@@ -181,7 +181,7 @@ def make_product():
     valid_input = ["A", "R", "Q"]
     user_input = ""
     while user_input not in valid_input:
-        # give user muliple options after adding product
+        # give user multiple options after adding product
         user_input = input().upper()
         if user_input == "A":
             make_product()
@@ -298,7 +298,7 @@ def delete_product():
         # verify if string entered is filled with digits
         # code taken from datasciencepirachay (see readme)
         print(
-            "Please enter the product numbers, seperated by comma's\n"
+            "Please enter the product numbers, separated by comma's\n"
             "and without spaces (for example: 2,4,7)\n"
         )
         products_to_delete = input().split(",")
@@ -316,20 +316,14 @@ def delete_product():
     display_stock_data()
 
 
-def display_stock_data():
+def inventory_explanation():
     """
-    function to display all the stock of the house.
+    prints explanation of inventory to terminal
     """
-    new_line = '\n'
-
-    # get the data from the google sheet and format it
-    data_food_raw = food.get_all_values()
-    data_food = format_stock_data(data_food_raw)
-    data_item_raw = item.get_all_values()
-    data_item = format_stock_data(data_item_raw)
-
-    inventory_explantion = (
-        f"{new_line}{Colors.hr}Your inventory explained!{new_line}{Colors.end}"
+    new_line = "\n"
+    print(
+        f"{new_line * 25}{Colors.hr}Your inventory explained!{new_line}"
+        f"{Colors.end}"
         f"{new_line}{Colors.cy}Name:{Colors.end}{new_line}"
         f"The name of your product."
         f"{new_line}"
@@ -340,10 +334,10 @@ def display_stock_data():
         f"{new_line}product is used to calculate how many days there are left"
         f"{new_line}before you run out of the product, so enter this value in"
         f"{new_line}the way that's most useful to you! It will then show your"
-        f"{new_line}estimated current quantity and orignal quantity seperated"
-        f"{new_line}by a slash like so: current/origal (e.g.: 4/10)"
+        f"{new_line}estimated current quantity and original quantity separated"
+        f"{new_line}by a slash like so: current/original (e.g.: 4/10)"
         f"{new_line}"
-        f"{new_line}{Colors.cy}Days p(er) Use:{Colors.end}{new_line}"
+        f"{new_line}{Colors.cy}Days/Use:{Colors.end}{new_line}"
         f"This value simply describes how many days"
         f"{new_line}it takes to finish 1 item of your product. So if you"
         f"{new_line}usually spend 10 days to finish one bag of pasta, your"
@@ -362,11 +356,106 @@ def display_stock_data():
         f"{new_line}before you run out of the product. Since it is an "
         f"{new_line}estimate, the accuracy will depend on how realistic"
         f" the days per use is.{new_line}"
-        )
+    )
+
+
+def general_explanation():
+    """
+    prints explanation of app to terminal
+    """
+    new_line = "\n"
+    print(
+        f"{new_line * 25}{new_line}{Colors.hr}Explanation{new_line}"
+        f"{Colors.end}"
+        f"{new_line * 2}Welcome to the Smart House Inventory explanation! Here"
+        f"{new_line}we'll teach you what this app does and how to use it."
+        f"{new_line * 2}"
+        f"{new_line}Smart House Inventory, what does that mean? Well, it means"
+        f"{new_line}that this app will assist you in a smart way with keeping"
+        f"{new_line}track of all the items in your house. For example:"
+        f"{new_line * 2}Are you ever on the toilet and find out you are out of"
+        f"{new_line}toilet paper? Or made a beautiful pasta sauce but now see"
+        f"{new_line}you don't have any pasta? This app will help you to"
+        f"{new_line}prevent just that!"
+        f"{new_line * 2}"
+        f"When you add products to your Smart House Inventory, the app will"
+        f"{new_line}ask for a {Colors.cy}Days/Use{Colors.end}. This means"
+        f"the days necessary for you to finish{new_line}a product or item of"
+        f"your product. {new_line}For example, if you have 10 apples and you"
+        f"{new_line}eat an apple every 3 days, your "
+        f"{Colors.cy}Days/Use{Colors.end} is 3."
+        f"{new_line}This then gets used to calculate how many items are left."
+        f"{new_line}After 6 days, you'd likely have eaten 2 apples, so you now"
+        f"{new_line}have 8 out of 10 apples. This will be shown like '8/10' in"
+        f"{new_line}the {Colors.cy}Quantity{Colors.end} column of your "
+        f" inventory. You will also {new_line}find how many days there are"
+        f"left until you will likely run out of {new_line}a product, in the"
+        f"{Colors.cy}Days left{Colors.end} column. In the example"
+        f"{new_line}of the apple, there would be 24 days left until you finish"
+        f"{new_line}all the apples."
+        f"{new_line * 2}{Colors.cy}Edit product{Colors.end}"
+        f"{new_line}When editing a product in your inventory, there are a few"
+        f"{new_line}things to note. When editing the {Colors.cy}Quantity"
+        f"{Colors.end}, it's important{new_line}to realize that you are not"
+        f"{new_line}adding to the original quantity, but replacing it. This"
+        f"{new_line}means that if you have 10 apples and bought 5 more, you"
+        f"{new_line}should fill in '15' as the new value for quantity. When"
+        f"{new_line}you buy a new product that is already in your inventory,"
+        f"{new_line}but has a different expiry date, it is advised to add it"
+        f"{new_line}as a new product instead, so you can keep track of both"
+        f"{new_line}both expiry dates."
+        f"{new_line * 2}{Colors.cy}Add product{Colors.end}"
+        f"{new_line}The add product feature guides you through a few questions"
+        f"{new_line}to add a new product. Most of this is pretty simple."
+        f"{new_line}When adding a product, it is important to add a realistic"
+        f"{new_line}{Colors.cy}Days/Use{Colors.end} so the app can calculate "
+        f"properly when you will {new_line}run out of it."
+        f"{new_line}As a side note, when you use multiple items per day of"
+        f"{new_line}a product, you could fill in a lower quantity to"
+        f"{new_line}account for that. For example, if you eat 2 apples per day"
+        f"{new_line}and you bought 10, you can set the quantity to 5 and leave"
+        f"{new_line}the Days/Use at 1. This way, the app can still give"
+        f"{new_line}correct estimates."
+        f"{new_line * 2}I think it is time to head over to your inventory now,"
+        f"{new_line}so you can see all of this in action! In your inventory"
+        f"{new_line}you can scroll up to get a explanation of each column."
+    )
+
+    print(
+        f"{new_line * 2}"
+        "Hit 'I' to see/edit your inventory, 'R' to return to the start of "
+        "the app\nor 'Q' to exit the program:\n"
+    )
+    answer = ""
+    valid_answers = ["I", "R", "Q"]
+    while answer not in valid_answers:
+        # ask user what they want to do and validate answer
+        answer = input().upper()
+        if answer == "I":
+            display_stock_data()
+        elif answer == "R":
+            main_function()
+        elif answer == "Q":
+            break
+        else:
+            print("Please enter an 'I', 'R' or 'Q'\n")
+
+
+def display_stock_data():
+    """
+    function to display all the stock of the house.
+    """
+    new_line = '\n'
+
+    # get the data from the google sheet and format it
+    data_food_raw = food.get_all_values()
+    data_food = format_stock_data(data_food_raw)
+    data_item_raw = item.get_all_values()
+    data_item = format_stock_data(data_item_raw)
 
     print(
         # print the entire inventory
-        f"{inventory_explantion}"
+        f"{inventory_explanation()}"
         f"{2 * new_line}"
         f"{Colors.hr}These are all the products you have in your house:"
         f"{Colors.end}{2 * new_line}"
@@ -475,7 +564,7 @@ def calculate_quantity_and_days_left(sheet):
     length_items = len(sheet[0])
 
     for product in range(1, length):
-        # put quantity, days per use and data added in seperate lists
+        # put quantity, days per use and data added in separate lists
         quantity.append(sheet[product][1])
         days_p_use.append(sheet[product][2])
         date_added.append(sheet[product][3])
@@ -521,27 +610,29 @@ def main_function():
         "fridge.\nYou can see things like the current quantity of a product, "
         "\nits expiry date and the date you added the product."
         "\nYou can even see when you will likely run out of a product!" +
-        Colors.cy + "\n\nMore info can be found when opening your "
-        "inventory.\n" + Colors.end
+        Colors.cy + "\n\nFirst time here? Make sure to read the explanation "
+        "section first (hit 'E')!.\n" + Colors.end
         )
     print(
-        "Hit 'I' to see/edit your inventory, 'P' to add a product or"
-        "\n'Q' to exit the program:\n"
+        "Hit 'I' to see/edit your inventory, 'P' to add a product"
+        "\n'E' for explanation of the app or 'Q' to exit the program:\n"
     )
     answer = ""
-    valid_answers = ["I", "P", "Q"]
+    valid_answers = ["I", "E", "P", "Q"]
     while answer not in valid_answers:
         # ask user what they want to do and validate answer
         answer = input().upper()
         if answer == "I":
             display_stock_data()
+        elif answer == "E":
+            general_explanation()
         elif answer == "P":
             print("\nCool let's add a product!")
             make_product()
         elif answer == "Q":
             break
         else:
-            print("Please enter an 'I', 'P' or 'Q'\n")
+            print("Please enter an 'I', 'P' 'E' or 'Q'\n")
 
 
 main_function()

@@ -126,6 +126,14 @@ The app itself does not contain any images.
 
 ## Testing
 
+Extensive testing was done to make sure all the features work as expected and all validations fire when needed. 
+
+### Pep 8 Online
+
+The code was run through the Pep 8 online validator to ensure no obvious errors were left in the code. The validator returned two warnings which were fixed promptly
+
+![pep8](assets/images/pep8-validation.png)
+
 ### Bugs
 
 * When creating the ```Food``` subclass, an error ```"too many positional arguments for method call"``` would pop up. This was caused by the ```date_added``` variable being passed as an argument, while in the ```Product``` parentclass, this is not passed as an argument. After removing this argument from the ```Food``` init method, the error was resolved and the class worked as expected.
