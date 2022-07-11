@@ -52,7 +52,7 @@ The app is designed to have a good flow, with clear options explained in a short
 
 ### Logic
 
-A flowchart was created to make the business logic more clear and as a guide while buildig the project. Notably missing are the delete and edit function, since this flowchart was created at the start of the proces and not updated throughout.
+A flowchart was created to make the business logic more clear and as a guide while building the project. Notably missing are the delete and edit function, since this flowchart was created at the start of the process and not updated throughout.
 
 ![flowchart](assets/images/flowchart.jpg)
 
@@ -62,13 +62,47 @@ Although colors are used on a few lines of text, no real color scheme was used. 
 
 ### Features
 
-The app is divided into to section, 'show/edit inventory' and 'add a product'. These to sections together hold all the features of the app:
+The app is divided into two main sections, 'show/edit inventory' and 'add a product'. These to sections together hold all the features of the app. The third option is a explanation page and the last is simply to quit the app.
 
 #### Main page
 
-This page shows a short introduction of the app and gives you the option to either show your inventory or add a product. New user are encouraged to first visit the inventory, because 'More info can be found when opening your inventory'.
+This page shows a short introduction of the app and gives you the option to either show your inventory, add a product or get an explanation of the full app. New users are encouraged to read the explanation first.
 
-[main page]()
+![main page](assets/images/app-home.png)
+
+#### Explanation
+
+So, after you first open the app, you will most likely navigate to the explanation page. This is simply a page with a explanation of most of the features in this app. The inventory will show some extra explanation for each individual column.
+
+![explanation](assets/images/app-explanation.png)
+
+#### Inventory
+
+After reading the explanation, user is encouraged to visit the inventory. Here they can find the products (if any were added already) and read more about each individual column.
+
+![inventory](assets/images/app-inventory.png)
+
+![inventory](assets/images/app-inventory-options.png)
+
+#### Edit
+
+After being presented with the inventory options, if user presses E, they can edit certain fields in the inventory. They will be guided through a series a questions, depending on the option they choose.
+
+![edit](assets/images/app-edit.png)
+
+#### Delete
+
+If the user presses D, they can delete one or multiple items of the list.
+
+![edit](assets/images/app-delete.png)
+
+#### Add product
+
+If user pressed R in their inventory, they will return to the home/main page of the app. Here they can hit A to add a product. This will guide them trough a series of questions again, to make sure the user adds the product properly. Each question will also run validations on the users' answers.
+
+![add](assets/images/app-add-product.png)
+
+![add](assets/images/app-add-product2.png)
 
 ### Future Features
 
@@ -165,3 +199,7 @@ When the project was almost finished, it was deployed to Heroku via the followin
 * In the "Buildpacks" Python and Nodejs.
 * Under "Deployment Method" click on "GitHub" to get access to your repository.
 * Enable Automatic Deploys" or "Deploy Branch".
+
+## Acknowledgements
+
+This website was built as part of the Full Stack Software Development course from Code Institute. I would like to thank my mentor Adeye Adegbenga, for his excellent feedback and guidance throughout the development of the project. I would also like to thank friends and family, who all took a look at the finished project to make sure it worked well and if I could improve things.
