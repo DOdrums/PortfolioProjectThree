@@ -130,11 +130,38 @@ Extensive testing was done to make sure all the features work as expected and al
 
 ### Pep 8 Online
 
-The code was run through the Pep 8 online validator to ensure no obvious errors were left in the code. The validator returned two warnings which were fixed promptly
+The code was run through the Pep 8 online validator to ensure no obvious errors were left in the code. The validator returned three warnings:
 
 ![pep8](assets/images/pep8-validation.png)
 
+After fixing these warnings, no errors were returned:
+
+![pep8 good](assets/images/pep8-good.png)
+
+Futhermore, lighthouse was used to check the websites performance and usability. This returned a subpar SEO score:
+
+![lighthouse](assets/images/lighthouse-bad.png)
+
+This rating was due to the meta tags missing in the html. After adding these meta tags, the score came back much better:
+
+![lighthouse good](assets/images/lighthouse-good.png)
+
 ### Bugs
 
-* When creating the ```Food``` subclass, an error ```"too many positional arguments for method call"``` would pop up. This was caused by the ```date_added``` variable being passed as an argument, while in the ```Product``` parentclass, this is not passed as an argument. After removing this argument from the ```Food``` init method, the error was resolved and the class worked as expected.
+* When creating the ```Food``` subclass, an error ```"too many positional arguments for method call"``` would pop up. This was caused by the ```date_added``` variable being passed as an argument, while in the ```Product``` parent class, this is not passed as an argument. After removing this argument from the ```Food``` init method, the error was resolved and the class worked as expected.
 * When using the ```sort()``` method in the ```delete_product()``` function, it kept returning ```None```. The reason for this, is that the ```sort()``` method sorts a list in place, instead of returning a new list. When writing ```list = list.sort()``` the result will be ```None``` because of this.
+
+#### Deployment
+
+To test the app locally, the terminal within VScode was used. To do this simply enter the command ```python run.py``` to start up the app.
+
+When the project was almost finished, it was deployed to Heroku via the following steps:
+* Create a new app in Heroku.
+* Select "New" and "Create new app".
+* Give the new app a name and click "Create new app".
+* Click "Settings".
+* Navigate to the "Config Vars" section and click "Reveal Config Vars"
+* Add KEY: PORT, VALUE: 8000 and CREDS: "the creds of the google sheet" to the config vars section.
+* In the "Buildpacks" Python and Nodejs.
+* Under "Deployment Method" click on "GitHub" to get access to your repository.
+* Enable Automatic Deploys" or "Deploy Branch".

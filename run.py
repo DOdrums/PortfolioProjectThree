@@ -321,7 +321,7 @@ def inventory_explanation():
     prints explanation of inventory to terminal
     """
     new_line = "\n"
-    print(
+    explanation = (
         f"{new_line * 25}{Colors.hr}Your inventory explained!{new_line}"
         f"{Colors.end}"
         f"{new_line}{Colors.cy}Name:{Colors.end}{new_line}"
@@ -355,8 +355,9 @@ def inventory_explanation():
         f"This is the amount of days that are left"
         f"{new_line}before you run out of the product. Since it is an "
         f"{new_line}estimate, the accuracy will depend on how realistic"
-        f" the days per use is.{new_line}"
+        f" the days per use is."
     )
+    return explanation
 
 
 def general_explanation():
@@ -390,7 +391,7 @@ def general_explanation():
         f"{new_line}the {Colors.cy}Quantity{Colors.end} column of your "
         f" inventory. You will also {new_line}find how many days there are"
         f"left until you will likely run out of {new_line}a product, in the"
-        f"{Colors.cy}Days left{Colors.end} column. In the example"
+        f"{Colors.cy} Days left{Colors.end} column. In the example"
         f"{new_line}of the apple, there would be 24 days left until you finish"
         f"{new_line}all the apples."
         f"{new_line * 2}{Colors.cy}Edit product{Colors.end}"
@@ -454,8 +455,12 @@ def display_stock_data():
     data_item = format_stock_data(data_item_raw)
 
     print(
+        # print the explanation for the inventory
+        inventory_explanation()
+    )
+
+    print(
         # print the entire inventory
-        f"{inventory_explanation()}"
         f"{2 * new_line}"
         f"{Colors.hr}These are all the products you have in your house:"
         f"{Colors.end}{2 * new_line}"
