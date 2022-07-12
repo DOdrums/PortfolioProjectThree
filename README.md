@@ -124,8 +124,9 @@ Last functionality that could be worthwhile, is to add a feature that notifies t
 
 As a data model the app uses a Product class. An instance of this class is created everytime a product is made. It will hold the name, quantity and days per use of the product and generate a date added. The Food class inherits from the Product class and extends it with a expiry date. The Product class also holds the add_product method, which adds the product to the google sheet whenever it's called. The google sheet stores any date. Below are pictures of both sheets that are used for the Food and Item inventory.
 
-[food sheet](assets/images/sheet-food.png)
-[item sheet](assets/images/sheet-item.png)
+![food sheet](assets/images/sheet-food.png)
+
+![item sheet](assets/images/sheet-item.png)
 
 
 ## Credits
