@@ -155,11 +155,11 @@ The app itself does not contain any images.
 
 [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - for the structure of the website and mocking of the terminal (written by Code Institute)
 
-[Python](https://www.python.org/) - to write all the logic of the app
-    * Datetime - to generate and manipulate dates easily
-    * Math library - to round up the quantity when calculating left over quantity.
-    * Re library - for using Regex to validate user input (would've been very verbose otherwise).
-    * Gspread and Credentials - for connecting to the google sheet and editing/reading it.
+[Python](https://www.python.org/) - to write all the logic of the app, using the following libraries:
+* Datetime - to generate and manipulate dates easily
+* Math library - to round up the quantity when calculating left over quantity.
+* Re library - for using Regex to validate user input (would've been very verbose otherwise).
+* Gspread and Credentials - for connecting to the google sheet and editing/reading it.
 
 [Gitpod](https://www.gitpod.io/) - used to connect a browser based VScode to github.
 
