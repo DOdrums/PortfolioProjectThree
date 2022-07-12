@@ -174,23 +174,25 @@ def make_product():
             print("\nPlease enter 'Y' or 'N'\n")
 
     print(
-        "\nHit 'A' to add another product, 'R' to return\n"
-        "to the start of the program or 'Q' to exit:\n"
+        "\nHit'I' to see your inventory 'A' to add another product,\n"
+        "'R' to returnto the start of the program or 'Q' to exit:\n"
     )
 
-    valid_input = ["A", "R", "Q"]
+    valid_input = ["I", "A", "R", "Q"]
     user_input = ""
     while user_input not in valid_input:
         # give user multiple options after adding product
         user_input = input().upper()
         if user_input == "A":
             make_product()
+        elif user_input == 'I':
+            display_stock_data()
         elif user_input == "R":
             main_function()
         elif user_input == "Q":
             pass
         else:
-            print("\nPlease enter an 'A', 'R' or 'Q'\n")
+            print("\nPlease enter an 'I', 'A', 'R' or 'Q'\n")
 
 
 def edit_product():
@@ -383,8 +385,8 @@ def general_explanation():
         f"{new_line}prevent just that!"
         f"{new_line * 2}"
         f"When you add products to your Smart House Inventory, the app will"
-        f"{new_line}ask for a {Colors.cy}Days/Use{Colors.end}. This means"
-        f"the days necessary for you to finish{new_line}a product or item of"
+        f"{new_line}ask for a {Colors.cy}Days/Use{Colors.end}. This stands for"
+        f" the days it takes you to finish{new_line}a product or item of "
         f"your product. {new_line}For example, if you have 10 apples and you"
         f"{new_line}eat an apple every 3 days, your "
         f"{Colors.cy}Days/Use{Colors.end} is 3."
@@ -392,7 +394,7 @@ def general_explanation():
         f"{new_line}After 6 days, you'd likely have eaten 2 apples, so you now"
         f"{new_line}have 8 out of 10 apples. This will be shown like '8/10' in"
         f"{new_line}the {Colors.cy}Quantity{Colors.end} column of your "
-        f" inventory. You will also {new_line}find how many days there are"
+        f" inventory. You will also {new_line}find how many days there are "
         f"left until you will likely run out of {new_line}a product, in the"
         f"{Colors.cy} Days left{Colors.end} column. In the example"
         f"{new_line}of the apple, there would be 24 days left until you finish"
@@ -406,7 +408,7 @@ def general_explanation():
         f"{new_line}should fill in '15' as the new value for quantity. When"
         f"{new_line}you buy a new product that is already in your inventory,"
         f"{new_line}but has a different expiry date, it is advised to add it"
-        f"{new_line}as a new product instead, so you can keep track of both"
+        f"{new_line}as a new product instead, so you can keep track of"
         f"{new_line}both expiry dates."
         f"{new_line * 2}{Colors.cy}Add product{Colors.end}"
         f"{new_line}The add product feature guides you through a few questions"
@@ -419,10 +421,12 @@ def general_explanation():
         f"{new_line}account for that. For example, if you eat 2 apples per day"
         f"{new_line}and you bought 10, you can set the quantity to 5 and leave"
         f"{new_line}the Days/Use at 1. This way, the app can still give"
-        f"{new_line}correct estimates."
+        f"{new_line}correct estimates. Alternatively, you could set the"
+        f"{new_line}Days/Use for the whole bag of apples, instead of per apple"
+        f"{new_line}(for example: 1 bag of apples with a Days/Use of 30)!"
         f"{new_line * 2}I think it is time to head over to your inventory now,"
         f"{new_line}so you can see all of this in action! In your inventory"
-        f"{new_line}you can scroll up to get a explanation of each column."
+        f"{new_line}you can scroll up to get an explanation of each column."
     )
 
     print(
@@ -475,12 +479,12 @@ def display_stock_data():
         f"{Colors.cy}Scroll up to see an explanation of the "
         f"inventory.{Colors.end}"
         f"{2 * new_line}"
-        f"Hit 'E' to edit an item, 'D' to delete an item,"
-        f"{new_line}'R' to return to the start of the program or 'Q' to exit:"
-        f"{new_line}"
+        f"Hit 'A' to add a product, 'E' to edit an item,"
+        f"{new_line}'D' to delete an item, 'R' to return to the start "
+        f"{new_line}of the program or 'Q' to exit:{new_line}"
     )
 
-    valid_input = ["E", "D", "R", "Q"]
+    valid_input = ["A", "E", "D", "R", "Q"]
     user_input = ""
     while user_input not in valid_input:
         # ask user what they want to do next and validate their input
@@ -489,12 +493,14 @@ def display_stock_data():
             edit_product()
         elif user_input == "D":
             delete_product()
+        elif user_input == "A":
+            make_product()
         elif user_input == "R":
             main_function()
         elif user_input == "Q":
             pass
         else:
-            print("Please enter an 'E', 'D', 'R' or 'Q'\n")
+            print("Please enter an 'A', 'E', 'D', 'R' or 'Q'\n")
 
 
 def format_stock_data(data):
