@@ -14,6 +14,45 @@ This project is built as part of the Code Institute Full Stack Software Developm
 
 [PortfolioProjectThree](https://github.com/DOdrums/PortfolioProjectThree)
 
+## Table of Contents
+
+- [Smart House Inventory](#smart-house-inventory)
+  - [Portfolio Project 3: Python Essentials](#portfolio-project-3-python-essentials)
+  - [Live Site](#live-site)
+  - [Github Repository](#github-repository)
+  - [Table of Contents](#table-of-contents)
+  - [UX](#ux)
+    - [Business Goals](#business-goals)
+    - [Target Audience](#target-audience)
+    - [User Stories](#user-stories)
+      - [As the owner](#as-the-owner)
+      - [As a new user](#as-a-new-user)
+      - [As a returning user](#as-a-returning-user)
+    - [Structure of the app](#structure-of-the-app)
+    - [Logic](#logic)
+    - [Color Scheme](#color-scheme)
+    - [Features](#features)
+      - [Main page](#main-page)
+      - [Explanation](#explanation)
+      - [Inventory](#inventory)
+      - [Edit](#edit)
+      - [Delete](#delete)
+      - [Add product](#add-product)
+    - [Future Features](#future-features)
+      - [Multi-user support](#multi-user-support)
+      - [Notifications](#notifications)
+      - [Expiry date warning](#expiry-date-warning)
+  - [Data Model](#data-model)
+  - [Credits](#credits)
+    - [Code](#code)
+    - [Images](#images)
+    - [Technologies used](#technologies-used)
+  - [Testing](#testing)
+    - [Pep 8 Online](#pep-8-online)
+    - [Bugs](#bugs)
+      - [Deployment](#deployment)
+  - [Acknowledgements](#acknowledgements)
+
 ## UX
 
 ### Business Goals
