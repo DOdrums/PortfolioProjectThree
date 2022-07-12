@@ -214,13 +214,14 @@ def edit_product():
             print("\nPlease enter an 'I' or 'F'\n")
 
     print("\nWhich product you want to edit?")
-    product_number = 0
-    while product_number < 1:
+    product_number = "0"
+    date_regex = r"([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9])"
+    while re.fullmatch(date_regex, str(product_number)) is None:
         # get product number from user
         print(
             "\nPlease enter the product number as listed in the inventory:\n"
             )
-        product_number = int(input())
+        product_number = input()
 
     valid_input = ["N", "Q", "D"]
     user_input = ""
@@ -312,6 +313,8 @@ def delete_product():
         # the first column doesn't get deleted
         if number != 0:
             sheet.delete_rows(number + 1)
+        else:
+            print("Can't delete home row!")
     print("\nProducts deleted!")
     display_stock_data()
 
