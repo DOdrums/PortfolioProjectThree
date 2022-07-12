@@ -182,7 +182,7 @@ def make_product():
             print("\nPlease enter 'Y' or 'N'\n")
 
     print(
-        "\nHit'I' to see your inventory 'A' to add another product,\n"
+        "\nHit 'I' to see your inventory 'A' to add another product,\n"
         "'R' to returnto the start of the program or 'Q' to exit:\n"
     )
 
