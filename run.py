@@ -104,9 +104,9 @@ def get_quantity():
     return quantity
 
 
-def get_days_p_use():
+def days_use():
     """
-    Function to get days per use of product from user
+    Function to get Days/Use of product from user
     """
     days_per_item = ""
     print("\nHow many days does it take to use up 1 item of your product?\n")
@@ -149,7 +149,7 @@ def make_product():
 
     name = get_name()
     quantity = get_quantity()
-    days_per_item = get_days_p_use()
+    days_per_item = days_use()
 
     if food_or_item == "F":
         # if food, get expiry date and than
@@ -160,6 +160,14 @@ def make_product():
         # if item, create instance of product
         product = Product(name, int(quantity), int(days_per_item))
 
+    print(
+        f"\nThis is your product:\n"
+        f"\nName: {name}"
+        f"\nQuantity: {quantity}"
+        f"\nDays/Use: {days_per_item}"
+        )
+    if food_or_item == "F":
+        print(f"Expiry date: {expiry}")
     print("\nAdd product (Y/N)?\n")
     user_add_y_n = ""
     while user_add_y_n != "Y" and user_add_y_n != "N":
@@ -263,7 +271,7 @@ def edit_product():
         elif user_input == "D":
             # get and update the days per use in google sheet
             print("\nOkay let's update the days per use!")
-            days_per_use = get_days_p_use()
+            days_per_use = days_use()
             days_cell = "C" + str((int(product_number) + 1))
             sheet.update_acell(days_cell, days_per_use)
             print("\nDays per use updated!")
