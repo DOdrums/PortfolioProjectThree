@@ -4,7 +4,7 @@
 
 ![Multi screen mockup](assets/images/mockup.png)
 
-This project is built as part of the Code Institute Full Stack Software Development course. For this course, Dirk Ornee had to built a third Portfolio Project. Inspired by the expired products in his fridge and the occasional lack of toilet paper in his bathroom, he decided to build a Smart House Inventory solution, that will keep track of all the products in his house.
+This project is built as part of the Code Institute Full Stack Software Development course. For this course, Dirk Ornee had to built a third Portfolio Project. Inspired by the expired products in his fridge and the occasional lack of toilet paper in his bathroom, he decided to build a Smart House Inventory solution, that will keep track of all the products in his house. The project had to built as a terminal app and is a single user application.
 
 ## Live Site
 
@@ -18,11 +18,11 @@ This project is built as part of the Code Institute Full Stack Software Developm
 
 ### Business Goals
 
-The goal of this project is to assist a user in keeping track of their house inventory and getting insights into when they should run out to the store to replenish some of their favorite products. It's built as a single user application, but could be forked and used with personal Google Sheets.
+The goal of this project is to assist a user in keeping track of their house inventory and getting insights into when they should run out to the store to replenish some of their favorite products. It's built as a single user application, but could be forked and used with personal a Google Sheets account.
 
 ### Target Audience
 
-I think a lot of people recognize the feeling of opening their fridge and finding their beautiful salmon or steak has sadly expired. Or perhaps you want to turn on the dishwasher at night and find yourself out of dishwasher tablets. Even worse, you are in the bathroom and have only one sheet of toilet paper left. Awkward and wasteful situations that can easily be prevented! With the smart house inventory you can easily generate an inventory with estimations when to get new products and neatly keep track of their expiry dates.
+I think a lot of people recognize the feeling of opening their fridge and finding their beautiful salmon or steak has sadly expired. Or perhaps you want to turn on the dishwasher at night and find yourself out of dishwasher tablets. Even worse, you are in the bathroom and have only one sheet of toilet paper left. Awkward and wasteful situations that can easily be prevented! With the smart house inventory you can easily generate an inventory with estimations when to get new products and neatly keep track of their expiry dates. So, this app is for anybody who whishes to keep better track of their house inventory.
 
 ### User Stories
 
@@ -52,7 +52,7 @@ The app is designed to have a good flow, with clear options explained in a short
 
 ### Logic
 
-A flowchart was created to make the business logic more clear and as a guide while building the project. Notably missing are the delete and edit function, since this flowchart was created at the start of the process and not updated throughout.
+A flowchart was created to make the business logic more clear and as a guide while building the project. Notably missing are the delete and edit function in the inventory and the explanation function on the main page, since this flowchart was created at the start of the process and not updated throughout.
 
 ![flowchart](assets/images/flowchart.jpg)
 
@@ -62,7 +62,7 @@ Although colors are used on a few lines of text, no real color scheme was used. 
 
 ### Features
 
-The app is divided into two main sections, 'show/edit inventory' and 'add a product'. These to sections together hold all the features of the app. The third option is a explanation page and the last is simply to quit the app.
+The app is divided into two main sections, 'show/edit inventory' and 'add a product'. These two sections together hold all the features of the app. The third option is a explanation page and the last is simply to quit the app.
 
 #### Main page
 
@@ -72,7 +72,7 @@ This page shows a short introduction of the app and gives you the option to eith
 
 #### Explanation
 
-So, after you first open the app, you will most likely navigate to the explanation page. This is simply a page with a explanation of most of the features in this app. The inventory will show some extra explanation for each individual column.
+So, after you first open the app, you will most likely navigate to the explanation page. This is simply a page with an explanation of most of the features in this app. The inventory will show some extra explanation for each individual column.
 
 ![explanation](assets/images/app-explanation.png)
 
@@ -86,7 +86,7 @@ After reading the explanation, user is encouraged to visit the inventory. Here t
 
 #### Edit
 
-After being presented with the inventory options, if user presses E, they can edit certain fields in the inventory. They will be guided through a series a questions, depending on the option they choose.
+After being presented with the inventory options, if user presses E, they can edit certain fields in the inventory. They will be guided through a series of questions, depending on the option they choose.
 
 ![edit](assets/images/app-edit.png)
 
@@ -195,8 +195,8 @@ When the project was almost finished, it was deployed to Heroku via the followin
 * Give the new app a name and click "Create new app".
 * Click "Settings".
 * Navigate to the "Config Vars" section and click "Reveal Config Vars"
-* Add KEY: PORT, VALUE: 8000 and CREDS: "the creds of the google sheet" to the config vars section.
-* In the "Buildpacks" Python and Nodejs.
+* Add KEY: PORT, VALUE: 8000 and CREDS: "contents of creds.json file" to the config vars section.
+* In the "Buildpacks" add Python and Nodejs.
 * Under "Deployment Method" click on "GitHub" to get access to your repository.
 * Enable Automatic Deploys" or "Deploy Branch".
 
